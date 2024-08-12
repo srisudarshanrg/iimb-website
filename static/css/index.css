@@ -23,6 +23,44 @@ nav {
     color: #fff;
 }
 
+.intro {
+    padding: 4%;
+}
+
+.intro .text {
+    padding-top: 7%;
+}
+
+.intro .img img {
+    width: 100%;
+    /* margin-top: 5%; */
+    border-radius: 10px;
+}
+
+@media (max-width: 1120px) {
+    nav {
+        font-size: 0.8rem;
+    }
+}
+
+@media (max-width: 770px) {
+    .intro {
+        margin-top: 3%;
+    }
+}
+
+@media (max-width: 320px) {
+    .intro {
+        margin-top: 15%;
+    }
+}
+
+@media (max-width: 733px) {
+    .intro {
+        margin-top: 10%;
+    }
+}
+
 @media (max-width: 768px) {
     .margined {
         margin-left: 0;
