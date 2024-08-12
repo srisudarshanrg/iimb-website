@@ -1,48 +1,29 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap');
 
 body {
-    background-color: #A9C191;
-    font-family: "Libre Baskerville", sans-serif;
+    background-color: #cae9ed;
 }
 
 nav {
-    font-family: "Poppins", sans-serif;
+    border-bottom: 1px solid rgb(139, 139, 139);
 }
 
-.nav-item .nav-link {
-    font-size: 1rem;
-}
-
-.mission {
-    gap: 2%;
-    padding: 5%;
-    background-color: #7B8D6A;
-}
-
-.story {
-    padding: 5%;
-}
-
-.team {
-    background-color: #93A87E;
-    padding: 5%;
-    font-family: "Open Sans", sans-serif;
-}
-
-.team .team-member {
-    background-color: #7B8D6A;
+.services {
     padding: 2%;
-    border-radius: 10px;
 }
 
-.team .team-member img {
-    border-radius: 100%;
+.services .card {
+    background-color: #a1c4c8;
 }
 
-.story p {
-    font-family: 1.4rem;
+.card-header {
+    background-color: #B0E0E6;
 }
 
 .footer {
-    background-color: #73a248;
+    background-color: #659095;
+}
+
+.footer a {
+    color: blue;
 }
