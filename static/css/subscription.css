@@ -8,6 +8,9 @@ nav {
     border-bottom: 2px solid rgb(78, 78, 78);
     font-family: "Poppins", sans-serif;
 }
+.card {
+    background-color: #D8E5F7;
+}
 
 .plans {
     padding: 2%;
