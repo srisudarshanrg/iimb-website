@@ -3,77 +3,124 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>MindMorphosis | Home</title>
+        <title>MindMorphosis | Services</title>
 
         <!-- bootstrap css -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 
         <!-- custom css -->
-        <link rel="stylesheet" href="static/css/index.css">
-        <link rel="stylesheet" href="static/css/common.css">
+        <link rel="stylesheet" href="../static/css/contact.css">
+        <link rel="stylesheet" href="../static/css/common.css">
+
+        <!-- favicon -->
+        <link rel="icon" href="../static/img/logo.png">
     </head>
 
     <body>
         <!-- navbar -->
         <nav class="navbar navbar-expand-lg navbar-light">
             <div class="container justify-content-center" id="nav">
-                <a class="navbar-brand" href="#"><!--<img src="static/img/logo" alt="logo">--> MindMorphosis</a>
+                <a class="navbar-brand" href="#"><img src="../static/img/logo.png" alt="logo" width="40"> MindMorphosis</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse justify-content-center" id="navbarNavDropdown">
                     <ul class="navbar-nav">
                         <li class="nav-item margined">
-                            <a class="nav-link" aria-current="page" href="#">Home</a>
+                            <a class="nav-link" aria-current="page" href="../index.html">Home</a>
                         </li>
 
                         <li class="nav-item margined">
-                            <a class="nav-link" href="other-html/services.html">Services</a>
+                            <a class="nav-link" href="services.html">Services</a>
                         </li>
 
                         <li class="nav-item margined">
-                            <a class="nav-link" href="other-html/education.html">Education</a>
-                        </li>
-
-                        <li class="nav-item dropdown margined">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Tranquility Corner</a>
-                            <ul class="dropdown-menu">
-                                <li><h5 style="padding-left: 7%;">Playlists</h5></li>
-                                <li><a class="dropdown-item" href="#">Energizing Beats</a></li>
-                                <li><a class="dropdown-item" href="#">Relaxing Melodies</a></li>
-                                <li><a class="dropdown-item" href="#">Focus Tracks</a></li>
-                                <li><a class="dropdown-item" href="#">Sleep Sounds</a></li>
-                            </ul>
+                            <a class="nav-link" href="education.html">Education</a>
                         </li>
 
                         <li class="nav-item margined">
-                            <a class="nav-link" href="other-html/subscription.html">Subscribe</a>
+                            <a class="nav-link" href="tranquility.html">Tranquility</a>
                         </li>
 
                         <li class="nav-item margined">
-                            <a class="nav-link" href="#">Terms and Conditions</a>
+                            <a class="nav-link" href="subscription.html">Subscribe</a>
                         </li>
 
                         <li class="nav-item margined">
-                            <a class="nav-link" href="other-html/contact.html">Help & Support</a>
+                            <a class="nav-link" href="about.html">About</a>
+                        </li>
+
+                        <li class="nav-item margined">
+                            <a class="nav-link" href="#">Terms</a>
+                        </li>
+
+                        <li class="nav-item margined">
+                            <a class="nav-link" href="contact.html">Help <i class="fa-solid fa-circle-info"></i></a>
                         </li>
                     </ul>
                 </div>
             </div>
         </nav>
 
-        <!-- intro -->
-        <div class="intro">
+        <br>
+
+        <!-- contact -->
+        <form action="mailto: srisudarshanrg@gmail.com" method="post" enctype="multipart/form-data" class="text-center form">
+            <h3>Contact Us</h3>
+            <br>
+            <label for="name">Enter your name: </label>
+            <input type="text" name="name" class="form-control" placeholder="Enter name" required>
+
+            <br>
+
+            <label for="msg">Your message: </label>
+            <input type="text" name="msg" class="form-control" placeholder="Enter message" required>
+
+            <br>
+
+            <button class="btn btn-primary">Submit</button>
+        </form>
+
+        <br>
+        <br>
+        <br>
+
+        <div class="text-center">
+            <a href="mailto: mindmorphosis.helpdesk@gmail.com" class="text-center">Want to talk to someone? Reach out via live chat or email</a>
+        </div>
+
+        <br>
+        <br>
+
+        <!-- footer -->
+        <div class="footer">
             <div class="row">
-                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 img">
-                    <img src="static/img/home_bg.jpg" alt="">
-                </div>
-                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text text-center">
-                    <h1>Welcome To Your Safe Space</h1>
-                    <h3>Where Every Mind Matters</h3>
+                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                    <h2>Links</h2>
+                    <a href="../other-html/services.html">Services</a>
                     <br>
-                    <a href="other-html/services.html" class="btn">Services</a>
-                    <a href="other-html/subscription.html" class="btn">Subscribe</a>
+                    <br>
+                    <a href="../other-html/education.html">Education</a>
+                    <br>
+                    <br>
+                    <a href="../other-html/tranquility.html">Tranquility</a>
+                    <br>
+                    <br>
+                    <a href="../other-html/terms.html">Terms & Conditions</a>
+                    <br>
+                    <br>
+                    <a href="../other-html/contact.html">Help </a>
+                </div>
+
+                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                    <h2>Contact Us</h2>
+                    <br>
+                    <p>Help Desk: <a href="mailto: mindmorphosis.helpdesk@gmail.com" >YourMindMorphosis@gmail.com</a> <br><br>Business Queries: <a href="mailto: yourmindmorphosis@gmail.com">support@mindmorphosis.com</a></p>
+                </div>
+
+                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                    <h2>Subscribe</h2>
+                    <br>
                 </div>
             </div>
         </div>
@@ -83,5 +130,6 @@
     
         <!-- custom js -->
         <script src="static/js/index.js"></script>
+        <script src="https://kit.fontawesome.com/2ce79bf423.js" crossorigin="anonymous"></script>
     </body>
 </html>
