@@ -3,6 +3,7 @@
 body {
     background-color: #cae9ed;
     font-family: "Work Sans", sans-serif;
+    color: #3B5998;
 }
 
 nav {
@@ -24,6 +25,7 @@ nav {
 
 .footer {
     background-color: #659095;
+    color: #000;
 }
 
 .footer a {
