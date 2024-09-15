@@ -398,5 +398,5 @@ FodyWeavers.xsd
 *.sln.iml
 
 # confidential
-functions.py
+confidential.py
 mind_morphosis.db
