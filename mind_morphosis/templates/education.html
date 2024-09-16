@@ -1,170 +1,66 @@
-<!doctype html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>MindMorphosis | Education Modules</title>
+{% extends 'base.html' %}
 
-        <!-- bootstrap css -->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+{% block css %}
+    <link rel="stylesheet" href="{{url_for('static', filename='css/education.css')}}">
+{% endblock %}
 
-        <!-- custom css -->
-        <link rel="stylesheet" href="../static/css/education.css">
-        <link rel="stylesheet" href="../static/css/common.css">
+{% block title %}
+    Education | MindMorphosis
+{% endblock %}`
 
-        <!-- favicon -->
-        <link rel="icon" href="../static/img/logo.png">
-    </head>
+{% block content %}
+    <!-- education -->
+    <div class="edu text-center">
+        <h1>Education Modules</h1>
 
-    <body>
-        <!-- navbar -->
-        <nav class="navbar navbar-expand-lg navbar-light">
-            <div class="container justify-content-center" id="nav">
-                <a class="navbar-brand" href="#"><img src="../static/img/logo.png" alt="logo" width="40"> MindMorphosis</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse justify-content-center" id="navbarNavDropdown">
-                    <ul class="navbar-nav">
-                        <li class="nav-item margined">
-                            <a class="nav-link" aria-current="page" href="../index.html">Home</a>
-                        </li>
-
-                        <li class="nav-item margined">
-                            <a class="nav-link" href="services.html">Services</a>
-                        </li>
-
-                        <li class="nav-item margined">
-                            <a class="nav-link" href="education.html">Education</a>
-                        </li>
-
-                        <li class="nav-item margined">
-                            <a class="nav-link" href="tranquility.html">Tranquility</a>
-                        </li>
-
-                        <li class="nav-item margined">
-                            <a class="nav-link" href="subscription.html">Subscribe</a>
-                        </li>
-
-                        <li class="nav-item margined">
-                            <a class="nav-link" href="about.html">About</a>
-                        </li>
-
-                        <li class="nav-item margined">
-                            <a class="nav-link" href="terms.html">Terms</a>
-                        </li>
-
-                        <li class="nav-item margined">
-                            <a class="nav-link" href="contact.html">Help <i class="fa-solid fa-circle-info"></i></a>
-                        </li>
-                    </ul>
+        <div class="card-group gap-4">
+            <div class="card">
+                <div class="card-header"><a href="" download="" style="text-decoration: none;">Mental Health Fundamentals <i class="fa-solid fa-file-arrow-down"></i></a></div>
+                <div class="card-body">
+                    <b>Understanding Mental Health</b><br>
+                    Explore the basics of mental health, including the difference between mental health and mental illness, common mental health conditions, and the importance of emotional well-being.
+                    <br>
+                    <br>                        
+                    <b>Signs & Symptoms</b><br>
+                    Learn to recognize the signs and symptoms of various mental health challenges such as anxiety, depression, PTSD, and more.
+                    <br>
+                    <br>
+                    <b>Self-Care Strategies</b><br>
+                    Discover effective self-care practices, including tips on maintaining mental health, building a routine, and incorporating wellness activities into daily life.
                 </div>
             </div>
-        </nav>
-
-        <!-- education -->
-        <div class="edu text-center">
-            <h1>Education Modules</h1>
-
-            <div class="card-group gap-4">
-                <div class="card">
-                    <div class="card-header"><a href="" download="" style="text-decoration: none;">Mental Health Fundamentals <i class="fa-solid fa-file-arrow-down"></i></a></div>
-                    <div class="card-body">
-                        <b>Understanding Mental Health</b><br>
-                        Explore the basics of mental health, including the difference between mental health and mental illness, common mental health conditions, and the importance of emotional well-being.
-                        <br>
-                        <br>                        
-                        <b>Signs & Symptoms</b><br>
-                        Learn to recognize the signs and symptoms of various mental health challenges such as anxiety, depression, PTSD, and more.
-                        <br>
-                        <br>
-                        <b>Self-Care Strategies</b><br>
-                        Discover effective self-care practices, including tips on maintaining mental health, building a routine, and incorporating wellness activities into daily life.
-                    </div>
+            
+            <div class="card">
+                <div class="card-header"><a href="" download="" style="text-decoration: none;">Stress Management <i class="fa-solid fa-file-arrow-down"></i></a></div>
+                <div class="card-body">
+                    <b>Understanding Stress</b> <br>
+                    Delve into the causes and effects of stress, and why it's important to manage it effectively.
+                    <br>
+                    <br>
+                    <b>Stress Reduction Technique</b><br>
+                    Learn about different stress reduction techniques such as deep breathing exercises, mindfulness, and progressive muscle relaxation.
+                    <br>
+                    <br>
+                    <b>Building Resilience</b><br>
+                    Strategies for developing resilience to stress, helping you to bounce back from adversity and maintain a balanced life.
                 </div>
-                
-                <div class="card">
-                    <div class="card-header"><a href="" download="" style="text-decoration: none;">Stress Management <i class="fa-solid fa-file-arrow-down"></i></a></div>
-                    <div class="card-body">
-                        <b>Understanding Stress</b> <br>
-                        Delve into the causes and effects of stress, and why it's important to manage it effectively.
-                        <br>
-                        <br>
-                        <b>Stress Reduction Technique</b><br>
-                        Learn about different stress reduction techniques such as deep breathing exercises, mindfulness, and progressive muscle relaxation.
-                        <br>
-                        <br>
-                        <b>Building Resilience</b><br>
-                        Strategies for developing resilience to stress, helping you to bounce back from adversity and maintain a balanced life.
-                    </div>
-                </div>
+            </div>
 
-                <div class="card">
-                    <div class="card-header"><a href="" download="" style="text-decoration: none;">Emotional Intelligence <i class="fa-solid fa-file-arrow-down"></i></a></div>
-                    <div class="card-body">
-                        <b>Understanding Emotions</b> <br>
-                        A deep dive into the role of emotions in our lives, how to identify and understand them, and the impact they have on decision-making and relationships.
-                        <br>
-                        <br>
-                        <b>Developing Empathy</b><br>
-                        Learn how to cultivate empathy and emotional awareness, improving your relationships with others and enhancing your emotional intelligence.                        <br>
-                        <br>
-                        <b>Emotional Regulation</b><br>
-                        Techniques for managing intense emotions, including anger, sadness, and anxiety, to maintain emotional balance.                    </div>
+            <div class="card">
+                <div class="card-header"><a href="" download="" style="text-decoration: none;">Emotional Intelligence <i class="fa-solid fa-file-arrow-down"></i></a></div>
+                <div class="card-body">
+                    <b>Understanding Emotions</b> <br>
+                    A deep dive into the role of emotions in our lives, how to identify and understand them, and the impact they have on decision-making and relationships.
+                    <br>
+                    <br>
+                    <b>Developing Empathy</b><br>
+                    Learn how to cultivate empathy and emotional awareness, improving your relationships with others and enhancing your emotional intelligence.                        <br>
+                    <br>
+                    <b>Emotional Regulation</b><br>
+                    Techniques for managing intense emotions, including anger, sadness, and anxiety, to maintain emotional balance.                    </div>
+            
                 </div>
             </div>
         </div>
-
-        <!-- footer -->
-        <div class="footer">
-            <div class="row">
-                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                    <h2>Links</h2>
-                    <a href="services.html">Services</a>
-                    <br>
-                    <br>
-                    <a href="education.html">Education</a>
-                    <br>
-                    <br>
-                    <a href="tranquility.html">Tranquility</a>
-                    <br>
-                    <br>
-                    <a href="terms.html">Terms & Conditions</a>
-                    <br>
-                    <br>
-                    <a href="contact.html">Help </a>
-                    <br>
-                    <br>
-                    <a href="terms.html">Terms & Conditions</a>
-                </div>
-
-                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                    <h2>Contact Us</h2>
-                    <br>
-                    <p>Help Desk: <a href="mailto: mindmorphosis.helpdesk@gmail.com" >mindmorphosis.helpdesk@gmail.com</a> <br><br>Business Queries: <a href="mailto: yourmindmorphosis@gmail.com">yourmindmorphosis@gmail.com</a></p>
-                </div>
-
-                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                    <h2>Subscribe</h2>
-                    <br>
-                    <a href="subscription.html">Freemium Plan</a>
-                    <br>
-                    <br>
-                    <br>
-                    <a href="subscription.html">Subscription Plans</a>
-                    <br>
-                    <br>
-                    <br>
-                    <a href="subscription.html">Pay Per Session</a>
-                </div>
-            </div>
-        </div>
-        
-        <!-- bootstrap js -->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    
-        <!-- custom js -->
-        <script src="static/js/index.js"></script>
-        <script src="https://kit.fontawesome.com/2ce79bf423.js" crossorigin="anonymous"></script>
-    </body>
-</html>
+    </div>
+{% endblock %}

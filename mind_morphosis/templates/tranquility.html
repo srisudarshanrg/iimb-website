@@ -1,164 +1,64 @@
-<!doctype html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>MindMorphosis | Tranquility Corner</title>
+{% extends 'base.html' %}
 
-        <!-- bootstrap css -->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+{% block css %}
+    <link rel="stylesheet" href="{{url_for('static', filename='css/tranquility.css')}}">
+{% endblock %}
 
-        <!-- custom css -->
-        <link rel="stylesheet" href="../static/css/common.css">
-        <link rel="stylesheet" href="../static/css/tranquility.css">
-        
-        <!-- favicon -->
-        <link rel="icon" href="../static/img/logo.png">
-    </head>
+{% block title %}
+    Tranquility | MindMorphosis
+{% endblock %}`
 
-    <body>
-        <!-- navbar -->
-        <nav class="navbar navbar-expand-lg navbar-light">
-            <div class="container justify-content-center" id="nav">
-                <a class="navbar-brand" href="#"><img src="../static/img/logo.png" alt="logo" width="40"> MindMorphosis</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse justify-content-center" id="navbarNavDropdown">
-                    <ul class="navbar-nav">
-                        <li class="nav-item margined">
-                            <a class="nav-link" aria-current="page" href="../index.html">Home</a>
-                        </li>
+{% block content %}
+    <!-- playlists -->
+    <div class="playlists text-center">
+        <h2><i class="fa-regular fa-circle-play"></i> Music</h2>
+        <br>
+        <br>
+        <a href="" class="btn music-categories"><i class="fa-solid fa-bolt"></i> Energizing Beats</a><br><br>
+        <a href="" class="btn music-categories"><i class="fa-solid fa-heart"></i> Relaxing Melodies</a><br><br>
+        <a href="" class="btn music-categories"><i class="fa-solid fa-person-rays"></i> Focus Tracks</a><br><br>
+        <a href="" class="btn music-categories"><i class="fa-solid fa-moon"></i> Sleep Sounds</a><br><br>
+    </div>
 
-                        <li class="nav-item margined">
-                            <a class="nav-link" href="services.html">Services</a>
-                        </li>
+    <br>
+    <br>
 
-                        <li class="nav-item margined">
-                            <a class="nav-link" href="education.html">Education</a>
-                        </li>
-
-                        <li class="nav-item margined">
-                            <a class="nav-link" href="tranquility.html">Tranquility</a>
-                        </li>
-
-                        <li class="nav-item margined">
-                            <a class="nav-link" href="subscription.html">Subscribe</a>
-                        </li>
-
-                        <li class="nav-item margined">
-                            <a class="nav-link" href="terms.html">Terms</a>
-                        </li>
-
-                        <li class="nav-item margined">
-                            <a class="nav-link" href="contact.html">Help <i class="fa-solid fa-circle-info"></i></a>
-                        </li>
-                    </ul>
-                </div>
+    <!-- challenges -->
+    <div class="challenges text-center">
+        <h2><i class="fa-solid fa-bars-progress"></i> Mindfullness and Meditation Challenges</h2>
+        <br>
+        <a href="">
+            <div>
+                <h4>Daily Challenges and Their Benefits</h4>
+                <br>
+                <p>Start your day with a new mindfulness challenge. From guided meditations to gratitude journaling, these challenges are designed to help you cultivate a peaceful mind.</p>
             </div>
-        </nav>
+        </a>
+    </div>
 
-       <!-- playlists -->
-        <div class="playlists text-center">
-            <h2><i class="fa-regular fa-circle-play"></i> Music</h2>
-            <br>
-            <br>
-            <a href="" class="btn music-categories"><i class="fa-solid fa-bolt"></i> Energizing Beats</a><br><br>
-            <a href="" class="btn music-categories"><i class="fa-solid fa-heart"></i> Relaxing Melodies</a><br><br>
-            <a href="" class="btn music-categories"><i class="fa-solid fa-person-rays"></i> Focus Tracks</a><br><br>
-            <a href="" class="btn music-categories"><i class="fa-solid fa-moon"></i> Sleep Sounds</a><br><br>
-        </div>
+    <br>
 
+    <!-- journal -->
+    <div class="journal text-center">
+        <h2><i class="fa-solid fa-book"></i> Guided Journaling</h2>
         <br>
         <br>
-
-        <!-- challenges -->
-        <div class="challenges text-center">
-            <h2><i class="fa-solid fa-bars-progress"></i> Mindfullness and Meditation Challenges</h2>
-            <br>
+        <div class="text-center" style="margin-left: auto;">
             <a href="">
-                <div>
-                    <h4>Daily Challenges and Their Benefits</h4>
-                    <br>
-                    <p>Start your day with a new mindfulness challenge. From guided meditations to gratitude journaling, these challenges are designed to help you cultivate a peaceful mind.</p>
+                <div class="journal-div">
+                    <h5>Daily Prompts</h5>
+                    <p>Explore your thoughts and emotions with our daily journaling prompts, designed to guide you on a journey of self-discovery and mental clarity."</p>
+                </div>
+            </a>
+
+            <br>
+
+            <a href="">
+                <div class="journal-div">
+                    <h5>Tips for Effective Journaling</h5>
+                    <p>"Learn how to journal effectively with our tips and tricks, ensuring that each session is meaningful and transformative."</p>
                 </div>
             </a>
         </div>
-
-        <br>
-
-        <!-- journal -->
-        <div class="journal text-center">
-            <h2><i class="fa-solid fa-book"></i> Guided Journaling</h2>
-            <br>
-            <br>
-            <div class="text-center" style="margin-left: auto;">
-                <a href="">
-                    <div class="journal-div">
-                        <h5>Daily Prompts</h5>
-                        <p>Explore your thoughts and emotions with our daily journaling prompts, designed to guide you on a journey of self-discovery and mental clarity."</p>
-                    </div>
-                </a>
-
-                <br>
-
-                <a href="">
-                    <div class="journal-div">
-                        <h5>Tips for Effective Journaling</h5>
-                        <p>"Learn how to journal effectively with our tips and tricks, ensuring that each session is meaningful and transformative."</p>
-                    </div>
-                </a>
-            </div>
-        </div>
-
-        <!-- footer -->
-        <div class="footer">
-            <div class="row">
-                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                    <h2>Links</h2>
-                    <a href="services.html">Services</a>
-                    <br>
-                    <br>
-                    <a href="education.html">Education</a>
-                    <br>
-                    <br>
-                    <a href="tranquility.html">Tranquility</a>
-                    <br>
-                    <br>
-                    <a href="terms.html">Terms & Conditions</a>
-                    <br>
-                    <br>
-                    <a href="contact.html">Help </a>
-                    <br>
-                    <br>
-                    <a href="terms.html">Terms & Conditions</a>
-                </div>
-
-                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                    <h2>Contact Us</h2>
-                    <br>
-                    <p>Help Desk: <a href="mailto: mindmorphosis.helpdesk@gmail.com" >mindmorphosis.helpdesk@gmail.com</a> <br><br>Business Queries: <a href="mailto: yourmindmorphosis@gmail.com">yourmindmorphosis@gmail.com</a></p>                </div>
-                
-                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                    <h2>Subscribe</h2>
-                    <br>
-                    <a href="subscription.html">Freemium Plan</a>
-                    <br>
-                    <br>
-                    <br>
-                    <a href="subscription.html">Subscription Plans</a>
-                    <br>
-                    <br>
-                    <br>
-                    <a href="subscription.html">Pay Per Session</a>
-                </div>
-            </div>
-        </div>
-        
-        <!-- bootstrap js -->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    
-        <!-- custom js -->
-        <script src="https://kit.fontawesome.com/2ce79bf423.js" crossorigin="anonymous"></script>
-    </body>
-</html>
+    </div>
+{% endblock %}

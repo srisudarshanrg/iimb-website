@@ -1,157 +1,56 @@
-<!doctype html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>MindMorphosis | About Us</title>
+{% extends 'base.html' %}
 
-        <!-- bootstrap css -->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+{% block css %}
+    <link rel="stylesheet" href="{{url_for('static', filename='css/about.css')}}">
+{% endblock %}
 
-        <!-- custom css -->
-        <link rel="stylesheet" href="../static/css/common.css">
-        <link rel="stylesheet" href="../static/css/about.css">
-        
-        <!-- favicon -->
-        <link rel="icon" href="../static/img/logo.png">
-    </head>
+{% block title %}
+    About | MindMorphosis
+{% endblock %}`
 
-    <body>
-        <!-- navbar -->
-        <nav class="navbar navbar-expand-lg navbar-light">
-            <div class="container justify-content-center" id="nav">
-                <a class="navbar-brand" href="#"><img src="../static/img/logo.png" alt="logo" width="40"> MindMorphosis</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse justify-content-center" id="navbarNavDropdown">
-                    <ul class="navbar-nav">
-                        <li class="nav-item margined">
-                            <a class="nav-link" aria-current="page" href="../index.html">Home</a>
-                        </li>
-
-                        <li class="nav-item margined">
-                            <a class="nav-link" href="services.html">Services</a>
-                        </li>
-
-                        <li class="nav-item margined">
-                            <a class="nav-link" href="education.html">Education</a>
-                        </li>
-
-                        <li class="nav-item margined">
-                            <a class="nav-link" href="tranquility.html">Tranquility</a>
-                        </li>
-
-                        <li class="nav-item margined">
-                            <a class="nav-link" href="subscription.html">Subscribe</a>
-                        </li>
-
-                        <li class="nav-item margined">
-                            <a class="nav-link" href="terms.html">Terms</a>
-                        </li>
-
-                        <li class="nav-item margined">
-                            <a class="nav-link" href="contact.html">Help <i class="fa-solid fa-circle-info"></i></a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-
-        <div class="mission text-center">
-            <h1>Our Mission & Vision</h1>
-            <br>
-            <br>
-            <div class="row">
-                <div class="col-lg-6 col-md-6 col-xs-12 col-sm-12 mission-div text-center">
-                    <h3>Our Mission</h3>
-                    <p>"To make mental health support accessible, inclusive, and personalized for everyone, everywhere."</p>
-                </div>
-                <div class="col-lg-6 col-md-6 col-xs-12 col-sm-12 mission-div text-center">
-                    <h3>Our Vision</h3>
-                    <p>"A world where mental well-being is a priority, and everyone has the resources to thrive emotionally and mentally."</p>
-                </div>
-            </div>
+{% block content %}
+<div class="mission text-center">
+    <h1>Our Mission & Vision</h1>
+    <br>
+    <br>
+    <div class="row">
+        <div class="col-lg-6 col-md-6 col-xs-12 col-sm-12 mission-div text-center">
+            <h3>Our Mission</h3>
+            <p>"To make mental health support accessible, inclusive, and personalized for everyone, everywhere."</p>
         </div>
-
-        <div class="story text-center">
-            <h1>Our Story...</h1>
-            <p>Mind Morphosis was born from a deeply personal place, inspired by a shared dream to make a meaningful difference in the lives of others. Witnessing the profound struggles of loved ones with mental health challenges ignited our passion for change. We recognized the urgent need for a space where everyone feels safe, understood, and empowered. Driven by a relentless commitment to compassion, we embarked on a journey to create a sanctuary for mental wellness—a platform that seamlessly integrates cutting-edge technology with the warmth of human connection. What started as a simple idea has evolved into a global movement, dedicated to transforming lives and making mental health support universally accessible.</p>
+        <div class="col-lg-6 col-md-6 col-xs-12 col-sm-12 mission-div text-center">
+            <h3>Our Vision</h3>
+            <p>"A world where mental well-being is a priority, and everyone has the resources to thrive emotionally and mentally."</p>
         </div>
+    </div>
+</div>
 
-        <div class="team text-center">
-            <h1>Meet the Team</h1>
-            <br><br>
-            <div class="anantika text-start team-member">
-                <h2><img src="../static/img/profiles/anantika.jpg" alt="anantika" width="100"> Anantika</h2>
-                <p>A visionary leader, has always dreamed of helping people and is now making that dream a reality as our Project Lead.</p>
-            </div>
-            <br>
-            <div class="anushka text-start team-member">
-                <h2><img src="../static/img/profiles/anushka.png" alt="anushka" width="100"> Anushka</h2>
-                <p>With her keen eye for design, heads our Product Development and User Engagement, ensuring our solutions are both innovative and user-friendly.</p>
-            </div>
-            <br>
-            <div class="nishant text-start team-member">
-                <h2><img src="../static/img/profiles/nishant.png" alt="nishant" width="100"> Nishant</h2>
-                <p>A strategic visionary, leads Strategy and Marketing, ensuring growth and strong community connections through his expertise in business, finance, and marketing.</p>
-            </div>
-            <br>
-            <div class="sudarshan text-start team-member">
-                <h2><img src="../static/img/profiles/sudarshan.png" alt="sudarshan" width="100"> Sudarshan</h2>
-                <p>With his deep love for coding and technology, drives our platform's technical innovation as our Tech Lead.</p>
-            </div>
-        </div>
+<div class="story text-center">
+    <h1>Our Story...</h1>
+    <p>Mind Morphosis was born from a deeply personal place, inspired by a shared dream to make a meaningful difference in the lives of others. Witnessing the profound struggles of loved ones with mental health challenges ignited our passion for change. We recognized the urgent need for a space where everyone feels safe, understood, and empowered. Driven by a relentless commitment to compassion, we embarked on a journey to create a sanctuary for mental wellness—a platform that seamlessly integrates cutting-edge technology with the warmth of human connection. What started as a simple idea has evolved into a global movement, dedicated to transforming lives and making mental health support universally accessible.</p>
+</div>
 
-        <!-- footer -->
-        <div class="footer">
-            <div class="row">
-                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                    <h2>Links</h2>
-                    <a href="services.html">Services</a>
-                    <br>
-                    <br>
-                    <a href="education.html">Education</a>
-                    <br>
-                    <br>
-                    <a href="tranquility.html">Tranquility</a>
-                    <br>
-                    <br>
-                    <a href="terms.html">Terms & Conditions</a>
-                    <br>
-                    <br>
-                    <a href="contact.html">Help </a>
-                    <br>
-                    <br>
-                    <a href="terms.html">Terms & Conditions</a>
-                </div>
-
-                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                    <h2>Contact Us</h2>
-                    <br>
-                    <p>Help Desk: <a href="mailto: mindmorphosis.helpdesk@gmail.com" >mindmorphosis.helpdesk@gmail.com</a> <br><br>Business Queries: <a href="mailto: yourmindmorphosis@gmail.com">yourmindmorphosis@gmail.com</a></p>
-                </div>
-
-                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                    <h2>Subscribe</h2>
-                    <br>
-                    <a href="subscription.html">Freemium Plan</a>
-                    <br>
-                    <br>
-                    <br>
-                    <a href="subscription.html">Subscription Plans</a>
-                    <br>
-                    <br>
-                    <br>
-                    <a href="subscription.html">Pay Per Session</a>
-                </div>
-            </div>
-        </div>
-        
-        <!-- bootstrap js -->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    
-        <!-- custom js -->
-        <script src="https://kit.fontawesome.com/2ce79bf423.js" crossorigin="anonymous"></script>
-    </body>
-</html>
+<div class="team text-center">
+    <h1>Meet the Team</h1>
+    <br><br>
+    <div class="anantika text-start team-member">
+        <h2><img src="{{url_for('static', filename='img/profiles/anantika.jpg')}}" alt="anantika" width="100"> Anantika</h2>
+        <p>A visionary leader, has always dreamed of helping people and is now making that dream a reality as our Project Lead.</p>
+    </div>
+    <br>
+    <div class="anushka text-start team-member">
+        <h2><img src="{{url_for('static', filename='img/profiles/anushka.png')}}" alt="anushka" width="100"> Anushka</h2>
+        <p>With her keen eye for design, heads our Product Development and User Engagement, ensuring our solutions are both innovative and user-friendly.</p>
+    </div>
+    <br>
+    <div class="nishant text-start team-member">
+        <h2><img src="{{url_for('static', filename='img/profiles/nishant.png')}}" alt="nishant" width="100"> Nishant</h2>
+        <p>A strategic visionary, leads Strategy and Marketing, ensuring growth and strong community connections through his expertise in business, finance, and marketing.</p>
+    </div>
+    <br>
+    <div class="sudarshan text-start team-member">
+        <h2><img src="{{url_for('static', filename='img/profiles/sudarshan.png')}}" alt="sudarshan" width="100"> Sudarshan</h2>
+        <p>With his deep love for coding and technology, drives our platform's technical innovation as our Tech Lead.</p>
+    </div>
+</div>
+{% endblock %}
