@@ -9,6 +9,10 @@ form {
     border-radius: 10px;
 }
 
+form .btn {
+    width: 100%;
+}
+
 @media (max-width: 770px) {
     form {
         width: 80%;
