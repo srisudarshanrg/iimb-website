@@ -1,0 +1,20 @@
+{% extends 'login_layout.html' %}
+
+{% block title %}
+    Login
+{% endblock %}
+
+{% block content %}
+    <form action="" method="post">
+        <h2>Login</h2>
+        {{form.credential(class="form-control", placeholder="Username")}}
+
+        <br>
+
+        {{form.pwd(class="form-control", placeholder="Password")}}
+
+        <br>
+
+        {{form.submit(class="btn btn-primary")}}
+    </form>
+{% endblock %}

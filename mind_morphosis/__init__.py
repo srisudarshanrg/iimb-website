@@ -9,13 +9,11 @@ app.config["SQLALCHEMY_DATABASE_URI"] = confidential_info.database_uri
 app.config["SECRET_KEY"] = confidential_info.secret_key
 
 db = SQLAlchemy(app)
-with app.app_context():
-    db.create_all()
 
-# login_manager = LoginManager(app)
-# login_manager.login_view = "login"
-# login_manager.login_message = "Login is required to access this page."
-# login_manager.login_message_category = "info"
+login_manager = LoginManager(app)
+login_manager.login_view = "login"
+login_manager.login_message = "Login is required to access this page."
+login_manager.login_message_category = "info"
 
 bcrypt = Bcrypt(app)
 

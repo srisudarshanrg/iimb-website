@@ -1,0 +1,25 @@
+form {
+    text-align: center;
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5%; 
+    box-shadow: 5px 5px 10px rgb(92, 92, 92);
+    padding: 2%;
+    border-radius: 10px;
+}
+
+@media (max-width: 770px) {
+    form {
+        width: 80%;
+    }
+}
+
+@media (max-width: 500px) {
+    form {
+        width: 100%;
+        margin-top: 15%;
+        box-shadow: none;
+        border-radius: none;
+    }
+}
