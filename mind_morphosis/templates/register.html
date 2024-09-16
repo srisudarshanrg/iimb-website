@@ -7,6 +7,8 @@
 {% block content %}
     <form action="" method="post" class="form">
         <h2>Register</h2>
+        {{form.hidden_tag()}}
+
         {{form.username(class="form-control", placeholder="Username")}}
         <div class="form-text">Must be at least 3 characters long and maximum 30 characters</div>
 

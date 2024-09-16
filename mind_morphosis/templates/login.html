@@ -7,6 +7,8 @@
 {% block content %}
     <form action="" method="post">
         <h2>Login</h2>
+        {{form.hidden_tag()}}
+
         {{form.credential(class="form-control", placeholder="Username")}}
 
         <br>
