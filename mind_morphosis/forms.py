@@ -2,6 +2,12 @@ from email import message
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, EmailField
 from wtforms.validators import DataRequired, Length, EqualTo
+from . import login_manager
+from .models import Users
+
+@login_manager.user_loader
+def load_user(user_id):
+    return Users.query.get(int(user_id))
 
 class LoginForm(FlaskForm):
     credential = StringField(label="Username or Email", validators=[DataRequired(message="This field is required.")])
