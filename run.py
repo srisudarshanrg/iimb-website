@@ -1,5 +1,4 @@
 from mind_morphosis import app, db
-from mind_morphosis.models import Users
 
 if __name__ == '__main__':
     with app.app_context():
