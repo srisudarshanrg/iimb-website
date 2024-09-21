@@ -5,7 +5,6 @@ from . import db, login_manager
 def load_user(user_id):
     return Users.query.get(int(user_id))
 
-
 class Users(db.Model, UserMixin):
     id = db.Column(db.Integer(), primary_key=True, nullable=False)
     username = db.Column(db.String(length=30), nullable=False, unique=True)
