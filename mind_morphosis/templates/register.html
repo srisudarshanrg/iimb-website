@@ -8,9 +8,10 @@
     <form action="" method="post" class="form">
         <h2>Register</h2>
         {{form.hidden_tag()}}
+        <input type="hidden" name="register">
 
         {{form.username(class="form-control", placeholder="Username")}}
-        <div class="form-text">Must be at least 3 characters long and maximum 30 characters</div>
+        <div class="form-text">Must be at least 3 characters long and at most 30 characters</div>
 
         <br>
 
@@ -19,12 +20,12 @@
 
         <br>
 
-        {{form.pwd(class="form-control", placeholder="Password")}}
+        {{form.pwd(class="form-control", placeholder="Password", type="password")}}
         <div class="form-text">Password is required for your account</div>
 
         <br>
 
-        {{form.pwd_confirm(class="form-control", placeholder="Confirm Password")}}
+        {{form.pwd_confirm(class="form-control", placeholder="Confirm Password", type="password")}}
         <div class="form-text">Must be equal to password</div>
 
         <br>

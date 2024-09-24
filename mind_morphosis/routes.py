@@ -1,5 +1,8 @@
-from flask import render_template
+from flask import flash, render_template, request
+from flask_login import current_user
 from mind_morphosis.forms import LoginForm, RegisterForm
+from mind_morphosis.functions import HashPassword
+from mind_morphosis.models import Users
 from . import app, db
 
 @app.route("/")
@@ -49,7 +52,7 @@ def tranquility():
 def forum():
     return render_template("forum.html")
 
-@app.route("/login")
+@app.route("/login", methods=["GET", "POST"])
 # login is the handler for the login page
 def login():
     login_form = LoginForm()
@@ -57,10 +60,22 @@ def login():
                            form=login_form,
                            )
 
-@app.route("/register")
+@app.route("/register", methods=["GET", "POST"])
 # register is the handler for the register page
 def register():
     register_form = RegisterForm()
+    
+    if request.method == "POST":
+        if "register" in request.form and register_form.errors == {}:
+            new_user = Users(
+                username=register_form.username.data,
+                pwd=HashPassword(register_form.pwd.data),
+                email=register_form.email.data,
+            )
+
+            db.session.add(new_user)
+            db.session.commit()
+
     return render_template("register.html",
                            form=register_form,
                            )

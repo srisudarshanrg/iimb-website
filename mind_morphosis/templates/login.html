@@ -9,6 +9,8 @@
         <h2>Login</h2>
         {{form.hidden_tag()}}
 
+        <input type="hidden" name="login">
+
         {{form.credential(class="form-control", placeholder="Username")}}
 
         <br>
@@ -22,6 +24,6 @@
         <br>
         <br>
 
-        {{form.submit(class="btn btn-primary")}}
+        {{form.submit(class="btn btn-primary", type="submit")}}
     </form>
 {% endblock %}

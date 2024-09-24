@@ -7,6 +7,7 @@ from . import confidential_info
 app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = confidential_info.database_uri
 app.config["SECRET_KEY"] = confidential_info.secret_key
+app.app_context().push()
 
 db = SQLAlchemy(app)
 
