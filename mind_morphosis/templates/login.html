@@ -5,17 +5,17 @@
 {% endblock %}
 
 {% block content %}
-    <form action="" method="post">
+    <form action="" method="post" autocomplete="on">
         <h2>Login</h2>
         {{form.hidden_tag()}}
 
         <input type="hidden" name="login">
 
-        {{form.credential(class="form-control", placeholder="Username")}}
+        {{form.credential(class="form-control", placeholder="Username or Email")}}
 
         <br>
 
-        {{form.pwd(class="form-control", placeholder="Password")}}
+        {{form.pwd(class="form-control", placeholder="Password", type="password")}}
 
         <br>
 

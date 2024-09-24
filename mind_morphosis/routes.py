@@ -1,7 +1,7 @@
 from flask import flash, render_template, request
-from flask_login import current_user
+from flask_login import current_user, login_user
 from mind_morphosis.forms import LoginForm, RegisterForm
-from mind_morphosis.functions import HashPassword
+from mind_morphosis.functions import CheckHashPassword, HashPassword
 from mind_morphosis.models import Users
 from . import app, db
 
@@ -56,6 +56,32 @@ def forum():
 # login is the handler for the login page
 def login():
     login_form = LoginForm()
+
+    if request.method == "POST":
+        if "login" in request.form and login_form.errors == {}:
+            credential = login_form.credential.data
+            pwd_entered = login_form.pwd.data
+
+            credential_check_username = Users.query.filter_by(username=credential).first()
+            credential_check_email = Users.query.filter_by(email=credential).first()
+
+            if credential_check_username:
+                if CheckHashPassword(credential_check_username.pwd, pwd_entered):
+                    login_user(credential_check_username)
+                    flash("You have been logged in successfully", category="success")
+                    print("logged in")
+                else:
+                    print("false")
+                    flash("Incorrect credentials", category="danger")
+
+            elif credential_check_email:
+                if CheckHashPassword(credential_check_email.pwd, pwd_entered):
+                    login_user(credential_check_email)
+                    print("logged in")
+                    flash("You have been logged in successfully", category="success")
+                else:
+                    flash("Incorrect credentials", category="danger")
+
     return render_template("login.html",
                            form=login_form,
                            )
