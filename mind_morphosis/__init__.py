@@ -3,6 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 from flask_bcrypt import Bcrypt
 from . import confidential_info
+import smtplib
 
 app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = confidential_info.database_uri

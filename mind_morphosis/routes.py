@@ -1,72 +1,89 @@
 from flask import flash, redirect, render_template, request, url_for
 from flask_login import current_user, login_user, login_required, logout_user
-from mind_morphosis.forms import LoginForm, RegisterForm
-from mind_morphosis.functions import CheckHashPassword, HashPassword
-from mind_morphosis.models import Users
+from .forms import LoginForm, RegisterForm
+from .functions import CheckHashPassword, HashPassword
+from .models import Users
+from .confidential_info import email, app_pwd
 from . import app, db
+import smtplib
 
+# home is the handler for the home page
 @app.route("/")
 @app.route("/home")
-# home is the handler for the home page
+@login_required
 def home():
     return render_template("home.html")
 
+# profile is the handler for the user profile page
 @app.route("/profile")
 @login_required
-# profile is the handler for the user profile page
 def profile():
     return render_template("profile.html")
 
+# about is the handler for the about page
 @app.route("/about")
 @login_required
-# about is the handler for the about page
 def about():
     return render_template("about.html")
 
-@app.route("/contact")
-@login_required
 # contact is the handler for the contact page
+@app.route("/contact", methods=["GET", "POST"])
+@login_required
 def contact():
+    if request.method == "POST":
+        email_address = request.form.get("email")
+        msg = request.form.get("msg")
+
+        smtp = smtplib.SMTP("smtp.gmail.com", 587)
+
+        smtp.starttls()
+        smtp.login(user=email, password=app_pwd)
+        smtp.sendmail(from_addr=email, to_addrs=email_address, msg=msg)
+        
+        flash(message="An email has been sent to notify the respective people about your concern.", category="success")
+
+        return render_template("contact.html")
+
     return render_template("contact.html")
 
+# education is the handler for the education page
 @app.route("/education")
 @login_required
-# education is the handler for the education page
 def education():
     return render_template("education.html")
 
+# services is the handler for the services page
 @app.route("/services")
 @login_required
-# services is the handler for the services page
 def services():
     return render_template("services.html")
 
+# subscription is the handler for the subscription page
 @app.route("/subscription")
 @login_required
-# subscription is the handler for the subscription page
 def subscription():
     return render_template("subscription.html")
 
+# terms is the handler for the terms page
 @app.route("/terms")
 @login_required
-# terms is the handler for the terms page
 def terms():
     return render_template("terms.html")
 
+# tranquility is the handler for the tranquility page
 @app.route("/tranquility")
 @login_required
-# tranquility is the handler for the tranquility page
 def tranquility():
     return render_template("tranquility.html")
 
+# forum is the handler for the forum page
 @app.route("/forum")
 @login_required
-# forum is the handler for the forum page
 def forum():
     return render_template("forum.html")
 
-@app.route("/login", methods=["GET", "POST"])
 # login is the handler for the login page
+@app.route("/login", methods=["GET", "POST"])
 def login():
     login_form = LoginForm()
 
@@ -101,8 +118,8 @@ def login():
                            form=login_form,
                            )
 
-@app.route("/register", methods=["GET", "POST"])
 # register is the handler for the register page
+@app.route("/register", methods=["GET", "POST"])
 def register():
     register_form = RegisterForm()
     
@@ -123,6 +140,7 @@ def register():
                            form=register_form,
                            )
 
+# logout is the handler for handling logout option
 @app.route("/logout")
 def logout():
     logout_user()

@@ -9,17 +9,17 @@
 {% endblock %}
 
 {% block content %}
+    <br>
     <!-- intro -->
-    <form action="mailto: mindmorphosis.helpdesk@gmail.com" method="post" enctype="multipart/form-data" class="text-center form">
+    <form action="" method="post" enctype="multipart/form-data" class="text-center form">
         <h3>Contact Us</h3>
         <br>
-        <label for="name">Enter your name: </label>
-        <input type="text" name="name" class="form-control" placeholder="Enter name" required>
+
+        <input type="email" name="email" class="form-control" placeholder="Enter email address" required>
 
         <br>
 
-        <label for="msg">Your message: </label>
-        <input type="text" name="msg" class="form-control" placeholder="Enter message" required>
+        <textarea name="msg" id="msg" rows="5" placeholder="Enter your concern" style="width: 100%;" class="form-control"></textarea>
 
         <br>
 

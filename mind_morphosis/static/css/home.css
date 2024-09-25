@@ -19,12 +19,12 @@ body {
     border-radius: 10px;
 }
 
-.btn {
+.btn-start {
     background-color: #FF6F61;
     color: #fff;
 }
 
-.btn:hover {
+.btn-start:hover {
     background-color: #ededed;
     color: #FF6F61;
 }
