@@ -1,5 +1,5 @@
-from flask import flash, render_template, request
-from flask_login import current_user, login_user
+from flask import flash, redirect, render_template, request, url_for
+from flask_login import current_user, login_user, login_required, logout_user
 from mind_morphosis.forms import LoginForm, RegisterForm
 from mind_morphosis.functions import CheckHashPassword, HashPassword
 from mind_morphosis.models import Users
@@ -11,43 +11,56 @@ from . import app, db
 def home():
     return render_template("home.html")
 
+@app.route("/profile")
+@login_required
+# profile is the handler for the user profile page
+def profile():
+    return render_template("profile.html")
+
 @app.route("/about")
-#  is the handler for the about page
+@login_required
+# about is the handler for the about page
 def about():
     return render_template("about.html")
 
 @app.route("/contact")
+@login_required
 # contact is the handler for the contact page
 def contact():
     return render_template("contact.html")
 
 @app.route("/education")
+@login_required
 # education is the handler for the education page
 def education():
     return render_template("education.html")
 
 @app.route("/services")
+@login_required
 # services is the handler for the services page
 def services():
     return render_template("services.html")
 
 @app.route("/subscription")
+@login_required
 # subscription is the handler for the subscription page
 def subscription():
     return render_template("subscription.html")
 
 @app.route("/terms")
+@login_required
 # terms is the handler for the terms page
 def terms():
     return render_template("terms.html")
 
 @app.route("/tranquility")
+@login_required
 # tranquility is the handler for the tranquility page
 def tranquility():
     return render_template("tranquility.html")
 
 @app.route("/forum")
-# @login_required
+@login_required
 # forum is the handler for the forum page
 def forum():
     return render_template("forum.html")
@@ -69,6 +82,7 @@ def login():
                 if CheckHashPassword(credential_check_username.pwd, pwd_entered):
                     login_user(credential_check_username)
                     flash("You have been logged in successfully", category="success")
+                    return redirect(url_for("home"))
                     print("logged in")
                 else:
                     print("false")
@@ -79,6 +93,7 @@ def login():
                     login_user(credential_check_email)
                     print("logged in")
                     flash("You have been logged in successfully", category="success")
+                    return redirect(url_for("home"))
                 else:
                     flash("Incorrect credentials", category="danger")
 
@@ -102,6 +117,14 @@ def register():
             db.session.add(new_user)
             db.session.commit()
 
+            return redirect(url_for("home"))
+
     return render_template("register.html",
                            form=register_form,
                            )
+
+@app.route("/logout")
+def logout():
+    logout_user()
+    flash(message="You have been logged out", category="info")
+    return redirect(url_for('login'))
