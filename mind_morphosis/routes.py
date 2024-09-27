@@ -1,8 +1,9 @@
+import datetime
 from flask import flash, redirect, render_template, request, url_for
 from flask_login import current_user, login_user, login_required, logout_user
 from .forms import LoginForm, RegisterForm
 from .functions import CheckHashPassword, HashPassword
-from .models import Users
+from .models import Session, Subscription, Users
 from .confidential_info import email, app_pwd
 from . import app, db
 import smtplib
@@ -18,7 +19,24 @@ def home():
 @app.route("/profile")
 @login_required
 def profile():
-    return render_template("profile.html")
+    user_details_row = Users.query.filter_by(id=current_user.id).first()
+
+    subscription_choice_row = Subscription.query.filter_by(id=user_details_row.subscription_id).first()
+
+    subscription_choice = subscription_choice_row.subscription_options
+
+    sessions = Session.query.filter_by(id=current_user.id).all()
+
+    user_details = {
+        "id": user_details_row.id,
+        "username": user_details_row.username,
+        "email": user_details_row.email,
+        "join_date": user_details_row.join_date,
+        "subscription": subscription_choice,
+        "sessions": sessions,
+    }
+
+    return render_template("profile.html", user_details=user_details)
 
 # about is the handler for the about page
 @app.route("/about")
@@ -124,17 +142,25 @@ def register():
     register_form = RegisterForm()
     
     if request.method == "POST":
-        if "register" in request.form and register_form.errors == {}:
+        if register_form.validate_on_submit() and register_form.errors == {}:
+            join_date = datetime.datetime.now()
             new_user = Users(
                 username=register_form.username.data,
                 pwd=HashPassword(register_form.pwd.data),
                 email=register_form.email.data,
+                join_date=join_date,
             )
 
             db.session.add(new_user)
             db.session.commit()
 
+            login_user(new_user)
+
             return redirect(url_for("home"))
+        
+        if register_form.errors != {}:
+            for error in register_form.errors.values():
+                flash(message=f"{error}", category="danger")
 
     return render_template("register.html",
                            form=register_form,

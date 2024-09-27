@@ -1,9 +1,14 @@
-{% extends 'bas.html' %}
+{% extends 'base.html' %}
 
 {% block title %}
     Your Profile | MindMorphosis
 {% endblock %}
 
 {% block content %}
-    Hi
+    {{user_details.id}}
+    {{user_details.username}}
+    {{user_details.email}}
+    {{user_details.join_date}}
+    {{user_details.subscription}}
+    {{user_details.sessions}}
 {% endblock %}
