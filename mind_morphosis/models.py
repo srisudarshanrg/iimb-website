@@ -12,8 +12,8 @@ class Users(db.Model, UserMixin):
     pwd = db.Column(db.String(), nullable=False)
     join_date = db.Column(db.DateTime(), nullable=False)
     subscription_id = db.Column(db.Integer(), db.ForeignKey("subscription.id"))
+    subscription_expire = db.Column(db.DateTime())
     subscription = db.relationship("Subscription", backref="subscription", lazy=True, foreign_keys=[subscription_id])
-
 
 class Subscription(db.Model):
     id = db.Column(db.Integer(), primary_key=True, nullable=False)

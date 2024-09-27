@@ -23,16 +23,35 @@ def profile():
 
     subscription_choice_row = Subscription.query.filter_by(id=user_details_row.subscription_id).first()
 
-    subscription_choice = subscription_choice_row.subscription_options
+    if subscription_choice_row:
+        subscription_choice = subscription_choice_row.subscription_options
+    else:
+        subscription_choice = "No subscriptions subscribed for now"
 
     sessions = Session.query.filter_by(id=current_user.id).all()
+
+    if sessions:
+        sessions = sessions
+    else:
+        sessions = "No sessions booked for now"
+
+    join_date = user_details_row.join_date
+    join_date = join_date.strftime("%d %B %Y")
+
+    subscription_expire = user_details_row.subscription_expire
+
+    if subscription_expire:
+        subscription_expire = subscription_expire.strftime("%d %B %Y")
+    else:
+        subscription_expire = ""
 
     user_details = {
         "id": user_details_row.id,
         "username": user_details_row.username,
         "email": user_details_row.email,
-        "join_date": user_details_row.join_date,
+        "join_date": join_date,
         "subscription": subscription_choice,
+        "subscription_expire": subscription_expire,
         "sessions": sessions,
     }
 

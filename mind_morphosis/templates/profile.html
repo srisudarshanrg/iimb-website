@@ -4,11 +4,92 @@
     Your Profile | MindMorphosis
 {% endblock %}
 
+{% block css %}
+    <link rel="stylesheet" href="{{url_for('static', filename='css/profiles.css')}}">
+{% endblock %}
+
 {% block content %}
-    {{user_details.id}}
-    {{user_details.username}}
-    {{user_details.email}}
-    {{user_details.join_date}}
-    {{user_details.subscription}}
-    {{user_details.sessions}}
+    <br>
+
+    <h1>User Stats</h1>
+
+    <br>
+
+    <div class="card-group gap-4">
+        <div class="card">
+            <div class="card-body">
+                Username
+                <br>
+                <b>{{user_details.username}}</b>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                Email Address
+                <br>
+                <b>{{user_details.email}}</b>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                Join Date
+                <br>
+                <b>{{user_details.join_date}}</b>
+            </div>
+        </div>
+    </div>
+
+    <br>
+
+    <div class="card-group gap-4">
+        <div class="card">
+            <div class="card-body">
+                <h5>Subscriptions</h5>
+                {% if user_details.subscription != "No subscriptions subscribed for now" %}
+                    <table class="table table-light table-hover">
+                        <thead>
+                            <td>Subscription Plan</td>
+                            <td>Expiring</td>
+                        </thead>
+                        <tr>
+                            <td>{{user_details.subscription}}</td>
+                            <td>{{user_details.subscription_expire}}</td>
+                        </tr>
+                    </table>
+                {% else %}
+                    <p>{{user_details.subscription}}</p>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-body">
+                <h5>Sessions</h5>
+                {% if user_details.sessions != "No sessions booked for now" %}
+                    <table class="table table-light table-hover">
+                        <thead>
+                            <td>Session Date</td>
+                            <td>Session Time (Start)</td>
+                            <td>Session Time (End)</td>
+                        </thead>
+                        <tr>
+                            <td>{{user_details.session.session_date}}</td>
+                            <td>{{user_details.session.time_start}}</td>
+                            <td>{{user_details.session.time_end}}</td>
+                        </tr>
+                    </table>
+
+                {% else %}
+                    <p>{{user_details.sessions}}</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <br>
+    <br>
+    <br>
+
+    <!-- {{user_details.subscription}}
+    {{user_details.sessions}} -->
 {% endblock %}

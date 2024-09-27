@@ -1,0 +1,37 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+
+body {
+    text-align: center;
+    font-family: "Poppins", sans-serif;
+}
+
+nav {
+    border-bottom: 1px solid grey;
+}
+
+div.card {
+    margin-left: 2%;
+    margin-right: 2%;
+    border: none;
+    border-radius: 45px;
+    box-shadow: 5px 5px 15px #f4b3ad;
+    text-align: center;
+    font-family: "Work Sans", sans-serif;
+    transition: 0.3s;
+    /* background-image: radial-gradient(#f4b3ad, #fd786c); */
+}
+
+div.card:hover {
+    transform: scale(1.05);
+    transition: 0.3s;
+}
+
+div.card b {
+    font-size: 1.2rem;
+    font-family: "Nunito", sans-serif;
+    color: #fc321f;
+}
+
+.footer {
+    border-top: 1px solid grey;
+}
