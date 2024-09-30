@@ -21,6 +21,11 @@ div.card {
     /* background-image: radial-gradient(#f4b3ad, #fd786c); */
 }
 
+.headings {
+    text-align: start;
+    padding-left: 3%;
+}
+
 div.card:hover {
     transform: scale(1.05);
     transition: 0.3s;
@@ -34,4 +39,8 @@ div.card b {
 
 .footer {
     border-top: 1px solid grey;
+}
+
+.acc-cen-btn {
+    font-family: "Work Sans", sans-serif;
 }

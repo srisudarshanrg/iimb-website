@@ -11,7 +11,7 @@
 {% block content %}
     <br>
 
-    <h1>User Stats</h1>
+    <h2 class="headings">User Stats</h2>
 
     <br>
 
@@ -83,6 +83,25 @@
                     <p>{{user_details.sessions}}</p>
                 {% endif %}
             </div>
+        </div>
+    </div>
+
+    <br>
+    <br>
+
+    <h2 class="headings">Account Centre</h2>
+    <br>
+    <div class="row text-start" style="width: 97%; margin-left: 3%;">
+        <div class="col">
+            <p>Change Details</p><br>
+            <p>Delete Account</p>
+        </div>
+        <div class="col">
+            <button class="btn btn-success acc-cen-btn">Change</button>
+            <br><br>
+            <form action="" method="post">
+                <button class="btn btn-danger acc-cen-btn" type="submit">Delete</button>
+            </form>
         </div>
     </div>
 

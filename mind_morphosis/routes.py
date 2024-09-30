@@ -16,7 +16,7 @@ def home():
     return render_template("home.html")
 
 # profile is the handler for the user profile page
-@app.route("/profile")
+@app.route("/profile", methods=["GET", "POST"])
 @login_required
 def profile():
     user_details_row = Users.query.filter_by(id=current_user.id).first()
