@@ -6,3 +6,6 @@
 //         document.getElementById("form-row").classList.remove("gap-4")
 //     }
 // })
+function ScrollBottom() {
+    window.scrollTo(0, document.body.scrollHeight)
+}
