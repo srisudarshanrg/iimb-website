@@ -3,7 +3,7 @@ from flask import flash, redirect, render_template, request, url_for
 from flask_login import current_user, login_user, login_required, logout_user
 from .forms import LoginForm, RegisterForm
 from .functions import CheckHashPassword, HashPassword
-from .models import Session, Subscription, Users
+from .models import Forum, Session, Subscription, Users
 from .confidential_info import email, app_pwd
 from . import app, db
 import smtplib
@@ -114,10 +114,27 @@ def tranquility():
     return render_template("tranquility.html")
 
 # forum is the handler for the forum page
-@app.route("/forum")
+@app.route("/forum", methods=["GET", "POST"])
 @login_required
 def forum():
-    return render_template("forum.html")
+    user_details = Users.query.filter_by(id=current_user.id).first()
+    username = user_details.username
+
+    user_msg_row = Forum.query.filter_by().all()
+
+    if request.method == "POST":
+        msg = request.form.get("msg")
+        new_msg = Forum(
+            msg=msg,
+            msg_user=username,
+        )
+
+        db.session.add(new_msg)
+        db.session.commit()
+
+        return redirect(url_for('forum'))
+
+    return render_template("forum.html", msgs=user_msg_row)
 
 # login is the handler for the login page
 @app.route("/login", methods=["GET", "POST"])
@@ -137,9 +154,7 @@ def login():
                     login_user(credential_check_username)
                     flash("You have been logged in successfully", category="success")
                     return redirect(url_for("home"))
-                    print("logged in")
                 else:
-                    print("false")
                     flash("Incorrect credentials", category="danger")
 
             elif credential_check_email:

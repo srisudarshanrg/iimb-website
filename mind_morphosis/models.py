@@ -26,3 +26,9 @@ class Session(db.Model):
     session_time_start = db.Column(db.DateTime(), nullable=False)
     session_time_end = db.Column(db.DateTime(), nullable=False)
     user = db.relationship("Users", backref="session_user", lazy=True, foreign_keys=[session_user])
+
+class Forum(db.Model):
+    id = db.Column(db.Integer(), primary_key=True, nullable=False)
+    msg = db.Column(db.String())
+    msg_user = db.Column(db.String(), db.ForeignKey("users.username"))    
+    user = db.relationship("Users", backref="sent_by_user", lazy=True, foreign_keys=[msg_user])

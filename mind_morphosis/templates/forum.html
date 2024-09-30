@@ -5,23 +5,38 @@
 {% endblock %}
 
 {% block title %}
-    Home | MindMorphosis
+    Forum | MindMorphosis
 {% endblock %}`
 
 {% block content %}
-    <!-- intro -->
-    <div class="intro">
-        <div class="row">
-            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 img">
-                <img src="{{url_for('static', filename='img/home_bg.jpg')}}" alt="meeting">
-            </div>
-            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text text-center">
-                <h1>Welcome To Your Safe Space</h1>
-                <h3>Where Every Mind Matters</h3>
-                <br>
-                <a href="{{url_for('services')}}" class="btn">Services</a>
-                <a href="{{url_for('subscription')}}" class="btn">Subscribe</a>
-            </div>
+    <br>
+    <h1 class="headings">Join the forum and type a message!</h1>
+
+    <form method="post" class="msg-form">
+        <div class="row" id="form-row">
+             <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12">
+                 <input type="text" name="msg" id="msg" placeholder="Type a message" class="form-control">
+             </div>
+             <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
+                 <button type="submit" class="btn btn-primary">Enter</button>
+             </div>
         </div>
+    </form>
+
+    <h3 class="headings">Forum Messages</h3>
+    <div class="msgs">
+        {% for msg in msgs %}
+            <div class="exist-msg" style="width: 100%; margin-top: 2%;">
+                <small>{{msg.msg_user}}</small>
+                <br>
+                <h5>{{msg.msg}}</h5>
+            </div>
+        {% endfor %}
     </div>
+
+    <br>
+{% endblock %}
+
+{% block js %}
+    <script src="{{url_for('static', filename='js/forum.js')}}"></script>
 {% endblock %}
