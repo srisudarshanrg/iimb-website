@@ -12,17 +12,6 @@
     <br>
     <h1 class="headings">Join the forum and type a message!</h1>
 
-    <form method="post" class="msg-form">
-        <div class="row" id="form-row">
-             <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12">
-                 <input type="text" name="msg" id="msg" placeholder="Type a message" class="form-control">
-             </div>
-             <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
-                 <button type="submit" class="btn btn-primary" id="enter-msg">Enter</button>
-             </div>
-        </div>
-    </form>
-
     <h3 class="headings">Forum Messages</h3>
     <div class="msgs">
         {% for msg in msgs %}
@@ -32,13 +21,22 @@
                 <h5>{{msg.msg}}</h5>
             </div>
         {% endfor %}
+        <br>
+        <br>
     </div>
 
-    <br>
+    <form method="post" class="msg-form">
+        <div class="row" id="form-row">
+             <div class="col-lg-10 col-md-10 col-sm-8 col-xs-8">
+                <input type="text" name="msg" id="msg" placeholder="Type a message" class="form-control">
+             </div>
+             <div class="col-lg-2 col-md-2 col-sm-4 col-xs-4">
+                <button type="submit" class="btn btn-primary" id="enter-msg">Enter</button>
+             </div>
+        </div>
+    </form>
 
-    {% if scroll == "true" %}
-        <button style="display: none;" onload="ScrollBottom()"></button>
-    {% endif %}
+    
 {% endblock %}
 
 {% block js %}

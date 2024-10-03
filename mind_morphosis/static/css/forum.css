@@ -2,6 +2,8 @@
 
 nav {
     font-size: 0.9rem;
+    border-bottom: 1px grey solid;
+    position: fixed;
 }
 
 .margined {
@@ -17,12 +19,18 @@ nav {
     color: #fff;
 }
 
-nav {
-    border-bottom: 1px grey solid;
-}
-
 .footer {
     background-color: rgb(225, 225, 225);
+    display: none;
+}
+
+.msg-form {
+    background-color: rgb(108, 108, 108);
+    position: absolute;
+    position: fixed;
+    z-index: 100;
+    bottom: 0;
+    width: 100%;
 }
 
 .msg-form .row {
