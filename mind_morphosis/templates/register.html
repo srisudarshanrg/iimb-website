@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block content %}
-    <form action="" method="post" autocomplete="on">
+    <form action="" method="post" autocomplete="on" style="margin-top: 2%;">
         <h2>Register</h2>
         {{form.hidden_tag()}}
         <input type="hidden" name="register">
@@ -27,6 +27,11 @@
 
         {{form.pwd_confirm(class="form-control", placeholder="Confirm Password", type="password")}}
         <div class="form-text">Must be equal to password</div>
+
+        <br>
+
+        {{form.phone(class="form-control", placeholder="Phone Number", type="text")}}
+        <div class="form-text">Valid phone number to be entered</div>
 
         <br>
         

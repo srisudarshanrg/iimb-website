@@ -10,6 +10,7 @@ class Users(db.Model, UserMixin):
     username = db.Column(db.String(length=30), nullable=False, unique=True)
     email = db.Column(db.String(), nullable=False, unique=True)
     pwd = db.Column(db.String(), nullable=False)
+    phone = db.Column(db.String(), nullable=False)
     join_date = db.Column(db.DateTime(), nullable=False)
     subscription_id = db.Column(db.Integer(), db.ForeignKey("subscription.id"))
     subscription_expire = db.Column(db.DateTime())

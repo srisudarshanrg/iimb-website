@@ -1,7 +1,8 @@
 import datetime
 from flask import flash, redirect, render_template, request, url_for
+from flask.cli import F
 from flask_login import current_user, login_user, login_required, logout_user
-from .forms import LoginForm, RegisterForm
+from .forms import ChangeForm, LoginForm, RegisterForm
 from .functions import CheckHashPassword, HashPassword
 from .models import Forum, Session, Subscription, Users
 from .confidential_info import email, app_pwd
@@ -49,13 +50,40 @@ def profile():
         "id": user_details_row.id,
         "username": user_details_row.username,
         "email": user_details_row.email,
+        "phone": user_details_row.phone,
         "join_date": join_date,
         "subscription": subscription_choice,
         "subscription_expire": subscription_expire,
         "sessions": sessions,
     }
 
-    return render_template("profile.html", user_details=user_details)
+    change_form = ChangeForm()
+
+    if request.method == "POST":
+        if change_form.validate_on_submit() and change_form.errors == {}:
+            user_to_change_row = Users.query.filter_by(username=user_details_row.username).first()
+            user_to_change_row.username = change_form.username.data
+            user_to_change_row.email = change_form.email.data
+            user_to_change_row.phone = change_form.phone.data
+
+            db.session.commit()
+            
+            flash(message="User details have been updated!", category="success")
+
+            print("hello")
+
+            return redirect(url_for('profile'))
+        
+        elif "deleteConfirm" in request.form:
+            user_to_delete_row = Users.query.filter_by(id=current_user.id).first()
+            db.session.delete(user_to_delete_row)
+            db.session.commit()
+
+            flash(message="Your account has been deleted", category="info")
+
+            return redirect(url_for('login'))            
+
+    return render_template("profile.html", user_details=user_details, change=change_form)
 
 # about is the handler for the about page
 @app.route("/about")
@@ -182,6 +210,7 @@ def register():
                 username=register_form.username.data,
                 pwd=HashPassword(register_form.pwd.data),
                 email=register_form.email.data,
+                phone=register_form.phone.data,
                 join_date=join_date,
             )
 

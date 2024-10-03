@@ -9,6 +9,66 @@
 {% endblock %}
 
 {% block content %}
+    <!-- change details form in modal -->
+    <div class="modal fade" id="exampleModalDetails" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Details</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form method="post">
+                        {{change.hidden_tag()}}
+                        <input type="hidden" name="change">
+                        
+                        {{change.username.label()}}
+                        {{change.username(class="form-control", placeholder="Username", id="change-username")}}
+
+                        <br>
+
+                        {{change.email.label()}}
+                        {{change.email(class="form-control", placeholder="Email", id="change-email")}}
+
+                        <br>
+
+                        {{change.phone.label()}}
+                        {{change.phone(class="form-control", placeholder="Phone Number", type="text", id="change-phone")}}
+                        
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            {{change.submit(class="btn btn-success")}}
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- delete email confirmation modal -->
+    <div class="modal fade" id="exampleModalDelete" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Delete Account</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <h3>Are You Sure?</h3>
+                    <p>This action is non-reversible. Are you sure you want to delete your account, available subscriptions and booked sessions?</p>
+                        
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-success" data-bs-dismiss="modal">No</button>
+                        <form method="post">
+                            <input type="hidden" name="deleteConfirm">
+                            <button type="submit" class="btn btn-danger">Yes, Delete</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <br>
 
     <h2 class="headings">User Stats</h2>
@@ -28,6 +88,13 @@
                 Email Address
                 <br>
                 <b>{{user_details.email}}</b>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                Phone Number
+                <br>
+                <b>{{user_details.phone}}</b>
             </div>
         </div>
         <div class="card">
@@ -94,14 +161,15 @@
     <div class="row text-start" style="width: 97%; margin-left: 3%;">
         <div class="col">
             <p>Change Details</p><br>
+            <p>Change Password</p><br>
             <p>Delete Account</p>
         </div>
         <div class="col">
-            <button class="btn btn-success acc-cen-btn">Change</button>
+            <button class="btn btn-success acc-cen-btn" data-bs-toggle="modal" data-bs-target="#exampleModalDetails">Change Details</button>
             <br><br>
-            <form action="" method="post">
-                <button class="btn btn-danger acc-cen-btn" type="submit">Delete</button>
-            </form>
+            <button class="btn btn-danger acc-cen-btn">Change Password</button>
+            <br><br>
+            <button class="btn btn-danger acc-cen-btn" type="submit" data-bs-toggle="modal" data-bs-target="#exampleModalDelete">Delete</button>
         </div>
     </div>
 
@@ -111,4 +179,15 @@
 
     <!-- {{user_details.subscription}}
     {{user_details.sessions}} -->
+
+    <script>
+        // displaying users former details in modal input fields
+        var username = "{{user_details.username}}"
+        var email = "{{user_details.email}}"
+        var phone = "{{user_details.phone}}"
+
+        document.getElementById("change-username").value = username
+        document.getElementById("change-email").value = email
+        document.getElementById("change-phone").value = phone
+    </script>
 {% endblock %}
