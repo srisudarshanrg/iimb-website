@@ -51,6 +51,7 @@ def profile():
         "username": user_details_row.username,
         "email": user_details_row.email,
         "phone": user_details_row.phone,
+        "pwd": user_details_row.pwd,
         "join_date": join_date,
         "subscription": subscription_choice,
         "subscription_expire": subscription_expire,
@@ -75,13 +76,19 @@ def profile():
             return redirect(url_for('profile'))
         
         elif "deleteConfirm" in request.form:
-            user_to_delete_row = Users.query.filter_by(id=current_user.id).first()
-            db.session.delete(user_to_delete_row)
-            db.session.commit()
+            pwd_entered = request.form.get("del_acc_password")
+            
+            if CheckHashPassword(user_details["pwd"], pwd_entered):
+                user_to_delete_row = Users.query.filter_by(id=current_user.id).first()
+                db.session.delete(user_to_delete_row)
+                db.session.commit()
 
-            flash(message="Your account has been deleted", category="info")
+                flash(message="Your account has been deleted", category="info")
 
-            return redirect(url_for('login'))            
+                return redirect(url_for('login'))
+            else:
+                flash(message="Incorrect Password", category="danger")     
+                return redirect(url_for('profile'))
 
     return render_template("profile.html", user_details=user_details, change=change_form)
 
@@ -170,7 +177,7 @@ def login():
     login_form = LoginForm()
 
     if request.method == "POST":
-        if "login" in request.form and login_form.errors == {}:
+        if login_form.validate_on_submit() and login_form.errors == {}:
             credential = login_form.credential.data
             pwd_entered = login_form.pwd.data
 
@@ -193,6 +200,13 @@ def login():
                     return redirect(url_for("home"))
                 else:
                     flash("Incorrect credentials", category="danger")
+
+            else:
+                flash(message="This user does not exist. Would you like to register?", category="info")
+
+        if login_form.validate_on_submit() and login_form.errors != {}:
+            for error in login_form.errors.values():
+                return flash(message=error, category="danger")
 
     return render_template("login.html",
                            form=login_form,

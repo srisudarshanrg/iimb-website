@@ -15,7 +15,12 @@
     <div class="msgs">
         {% for msg in msgs %}
             <div class="exist-msg" style="width: 100%; margin-top: 2%;">
-                <small>{{msg.msg_user}}</small>
+                {% if msg.msg_user == None %}
+                    <small>deleted_user</small>
+                {% else %}
+                    <small>{{msg.msg_user}}</small>
+                {% endif %}
+                
                 <br>
                 <h5>{{msg.msg}}</h5>
             </div>

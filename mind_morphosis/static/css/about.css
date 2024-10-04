@@ -3,14 +3,11 @@
 body {
     background-color: #A9C191;
     font-family: "Libre Baskerville", sans-serif;
+    width: 100%;
 }
 
 nav {
     font-family: "Poppins", sans-serif;
-}
-
-.nav-item .nav-link {
-    font-size: 1rem;
 }
 
 .mission {
@@ -45,5 +42,13 @@ nav {
 }
 
 .footer {
-    background-color: #73a248;
+    background-color: #2c6b02;
+}
+
+.footer a {
+    color: rgb(0, 29, 71);
+}
+
+.row {
+    width: 100%;
 }

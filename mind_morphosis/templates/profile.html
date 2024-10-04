@@ -56,14 +56,15 @@
                 <div class="modal-body">
                     <h3>Are You Sure?</h3>
                     <p>This action is non-reversible. Are you sure you want to delete your account, available subscriptions and booked sessions?</p>
-                        
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-success" data-bs-dismiss="modal">No</button>
-                        <form method="post">
-                            <input type="hidden" name="deleteConfirm">
-                            <button type="submit" class="btn btn-danger">Yes, Delete</button>
-                        </form>
-                    </div>
+                    <hr>
+                    <form method="post">
+                        <input type="hidden" name="deleteConfirm">
+                        <h3>Enter Password to Confirm</h3>
+                        <input type="password" name="del_acc_password" id="del_acc_password" placeholder="Password" class="form-control">
+                        <br>
+                        <button type="submit" class="btn btn-danger">Yes, Delete</button>
+                        <button type="button" class="btn btn-success" data-bs-dismiss="modal">No, Cancel</button>
+                    </form>
                 </div>
             </div>
         </div>
