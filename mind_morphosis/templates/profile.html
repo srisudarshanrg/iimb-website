@@ -36,7 +36,7 @@
                         {{change.phone(class="form-control", placeholder="Phone Number", type="text", id="change-phone")}}
                         
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                             {{change.submit(class="btn btn-success")}}
                         </div>
                     </form>
@@ -64,6 +64,30 @@
                         <br>
                         <button type="submit" class="btn btn-danger">Yes, Delete</button>
                         <button type="button" class="btn btn-success" data-bs-dismiss="modal">No, Cancel</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- change password confirmation modal -->
+    <div class="modal fade" id="exampleModalChangePassword" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Change Password</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form method="post">
+                        <input type="hidden" name="changePassword">
+
+                        <input type="password" name="change-pwd" id="change-pwd" class="form-control" placeholder="Enter current password">                    
+                
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                            <button type="submit" class="btn btn-success">Enter</button>
+                        </div>
                     </form>
                 </div>
             </div>
@@ -168,7 +192,7 @@
         <div class="col">
             <button class="btn btn-success acc-cen-btn" data-bs-toggle="modal" data-bs-target="#exampleModalDetails">Change Details</button>
             <br><br>
-            <button class="btn btn-danger acc-cen-btn">Change Password</button>
+            <button class="btn btn-danger acc-cen-btn" data-bs-toggle="modal" data-bs-target="#exampleModalChangePassword">Change Password</button>
             <br><br>
             <button class="btn btn-danger acc-cen-btn" type="submit" data-bs-toggle="modal" data-bs-target="#exampleModalDelete">Delete</button>
         </div>

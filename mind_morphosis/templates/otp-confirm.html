@@ -1,0 +1,15 @@
+{% extends 'login_layout.html' %}
+
+{% block title %}
+    OTP Verification
+{% endblock %}
+
+{% block content %}
+    <form method="post">
+        <input type="number" placeholder="Enter OTP" class="form-control" name="otp">
+        <br>
+
+        <button type="submit" class="btn btn-primary">Verify</button>
+        <a href="{{url_for('login')}}" role="button" class="btn btn-secondary" style="margin-top: 1%;">Cancel</a>
+    </form>
+{% endblock %}

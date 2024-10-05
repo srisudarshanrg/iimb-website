@@ -1,0 +1,16 @@
+{% extends 'login_layout.html' %}
+
+{% block title %}
+    Reset Password
+{% endblock %}
+
+{% block content %}
+    <form method="post">
+        <input type="password" name="pwd" id="pwd" class="form-control" placeholder="Password">
+        <br>
+        <input type="password" name="pwd-confirm" id="pwd-confirm" class="form-control" placeholder="Confirm Password">
+        <br>
+        <button type="submit" class="btn btn-primary">Enter</button>
+        <a href="{{url_for('profile')}}" role="button" class="btn btn-secondary" style="margin-top: 1%;">Cancel</a>
+    </form>
+{% endblock %}

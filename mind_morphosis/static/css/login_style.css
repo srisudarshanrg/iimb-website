@@ -13,6 +13,17 @@ form .btn {
     width: 100%;
 }
 
+form.forgot-pwd-form {
+    text-align: none;
+    width: 60%;
+    margin-left: none;
+    margin-right: none;
+    margin-top: none; 
+    box-shadow: none;
+    padding: none;
+    border-radius: none;
+}
+
 @media (max-width: 770px) {
     form {
         width: 80%;

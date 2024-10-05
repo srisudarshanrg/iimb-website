@@ -5,6 +5,29 @@
 {% endblock %}
 
 {% block content %}
+    <!-- modal for asking mail id for forgot password -->
+    <div class="modal fade" id="exampleModalForgotPassword" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <form method="post" class="forgot-pwd-form" class="form">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Forgot Password</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    
+                    <div class="modal-body">                        
+                        <input type="hidden" name="forgotPassword">
+                        <input type="email" placeholder="Enter email address" class="form-control" name="forgot-pwd">                        
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Enter</button>
+                    </div>                    
+                </div>
+            </form>
+        </div>
+    </div>
+    
     <form action="" method="post" autocomplete="on">
         <h2>Login</h2>
         {{form.hidden_tag()}}
@@ -20,10 +43,10 @@
         <br>
 
         <a href="{{url_for('register')}}" class="btn btn-dark btn-sm">Register if you don't have an account.</a>
+        <a type="button" class="btn btn-dark btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModalForgotPassword" style="margin-top: 1%;">Forgot Password</a>
 
         <br>
-        <br>
 
-        {{form.submit(class="btn btn-primary", type="submit")}}
+        {{form.submit(class="btn btn-primary", type="submit", style="margin-top: 2%;")}}        
     </form>
 {% endblock %}

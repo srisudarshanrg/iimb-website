@@ -1,5 +1,6 @@
 import datetime
-from flask import flash, redirect, render_template, request, url_for
+import random
+from flask import flash, redirect, render_template, request, session, url_for
 from flask.cli import F
 from flask_login import current_user, login_user, login_required, logout_user
 from .forms import ChangeForm, LoginForm, RegisterForm
@@ -88,6 +89,15 @@ def profile():
                 return redirect(url_for('login'))
             else:
                 flash(message="Incorrect Password", category="danger")     
+                return redirect(url_for('profile'))
+            
+        elif "changePassword" in request.form:
+            pwd_entered = request.form.get("change-pwd")
+
+            if CheckHashPassword(user_details["pwd"], pwd_entered):
+                return redirect(url_for('reset_pwd'))
+            else:
+                flash(message="Incorrect Password", category="danger")
                 return redirect(url_for('profile'))
 
     return render_template("profile.html", user_details=user_details, change=change_form)
@@ -187,6 +197,7 @@ def login():
             if credential_check_username:
                 if CheckHashPassword(credential_check_username.pwd, pwd_entered):
                     login_user(credential_check_username)
+                    session["logged"] = True
                     flash("You have been logged in successfully", category="success")
                     return redirect(url_for("home"))
                 else:
@@ -196,6 +207,7 @@ def login():
                 if CheckHashPassword(credential_check_email.pwd, pwd_entered):
                     login_user(credential_check_email)
                     print("logged in")
+                    session["logged"] = True
                     flash("You have been logged in successfully", category="success")
                     return redirect(url_for("home"))
                 else:
@@ -207,6 +219,24 @@ def login():
         if login_form.validate_on_submit() and login_form.errors != {}:
             for error in login_form.errors.values():
                 return flash(message=error, category="danger")
+            
+        elif "forgotPassword" in request.form:
+            smtp = smtplib.SMTP("smtp.gmail.com", 587)
+
+            otp = str(random.randint(0, 999999))
+
+            to_email_address = request.form.get("forgot-pwd")
+            session['email'] = to_email_address
+
+            smtp.starttls()
+            smtp.login(user=email, password=app_pwd)
+            smtp.sendmail(from_addr=email, to_addrs=to_email_address, msg=otp)
+
+            flash(message="An OTP has been sent to your mail. Please check the OTP and type in below.", category="info")
+
+            session['otp'] = otp
+
+            return redirect(url_for('otp_confirm'))
 
     return render_template("login.html",
                            form=login_form,
@@ -233,6 +263,8 @@ def register():
 
             login_user(new_user)
 
+            session["logged"] = True
+
             return redirect(url_for("home"))
         
         if register_form.errors != {}:
@@ -247,5 +279,67 @@ def register():
 @app.route("/logout")
 def logout():
     logout_user()
+    session.pop("logged")
     flash(message="You have been logged out", category="info")
     return redirect(url_for('login'))
+
+# reset_pwd is the handler for the reset password page
+@app.route("/reset-pwd", methods=["GET", "POST"])
+def reset_pwd():
+    email = session.get("email")
+
+    user_details_row_alternative = Users.query.filter_by(email=email).first()
+
+    if 'logged' in session:
+        user_details_row = Users.query.filter_by(id=current_user.id).first()
+        if request.method == "POST":
+            pwd_entered = request.form.get("pwd")
+            pwd_entered_confirm = request.form.get("pwd-confirm")
+            if pwd_entered == pwd_entered_confirm:
+                new_pwd = HashPassword(pwd_entered)
+                user_details_row.pwd = new_pwd
+
+                db.session.commit()
+                flash(message="Your password has been changed successfully!", category="success")
+                return redirect(url_for('profile'))
+            else:
+                flash(message="Password should be same as confirmed password.", category="danger")
+
+                return render_template("reset-pwd.html")   
+                     
+    elif 'logged' not in session and user_details_row_alternative:
+        if request.method == "POST":
+            pwd_entered = request.form.get("pwd")
+            pwd_entered_confirm = request.form.get("pwd-confirm")
+            if pwd_entered == pwd_entered_confirm:
+                new_pwd = HashPassword(pwd_entered)
+                user_details_row_alternative.pwd = new_pwd
+
+                db.session.commit()
+                flash(message="Your password has been changed successfully!", category="success")
+                return redirect(url_for('profile'))
+            else:
+                flash(message="Password should be same as confirmed password.", category="danger")
+
+                return render_template("reset-pwd.html")
+        
+    else:
+        flash(message="Cannot access reset password page without being logged in or using forgot password feature. While using forgot password feature, email you enter must be same as the email you used when you registered.", category="danger")
+        return redirect(url_for('login'))
+    
+    return render_template("reset-pwd.html")
+        
+
+@app.route("/confirm-otp", methods=["GET", "POST"])
+def otp_confirm():
+    if request.method == "POST":
+        otp = session.get("otp")
+        if otp:
+            otp_entered = request.form.get("otp")
+            if otp == otp_entered:
+                flash(message="OTP verification complete. You can reset your password here.", category="success")
+                return redirect(url_for('reset_pwd'))
+            else:
+                flash(message="Invalid OTP. Try again.", category="danger")
+
+    return render_template("otp-confirm.html")
