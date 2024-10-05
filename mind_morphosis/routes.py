@@ -280,6 +280,13 @@ def register():
 def logout():
     logout_user()
     session.pop("logged")
+
+    if "email" in session:
+        session.pop("email")
+
+    if "otp" in session:
+        session.pop("otp")
+        
     flash(message="You have been logged out", category="info")
     return redirect(url_for('login'))
 
@@ -306,6 +313,7 @@ def reset_pwd():
                 flash(message="Password should be same as confirmed password.", category="danger")
 
                 return render_template("reset-pwd.html")   
+        session.pop("logged")
                      
     elif 'logged' not in session and user_details_row_alternative:
         if request.method == "POST":
@@ -341,5 +349,6 @@ def otp_confirm():
                 return redirect(url_for('reset_pwd'))
             else:
                 flash(message="Invalid OTP. Try again.", category="danger")
+        session.pop("otp")
 
     return render_template("otp-confirm.html")
