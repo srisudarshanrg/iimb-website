@@ -197,7 +197,6 @@ def login():
             if credential_check_username:
                 if CheckHashPassword(credential_check_username.pwd, pwd_entered):
                     login_user(credential_check_username)
-                    session["logged"] = True
                     flash("You have been logged in successfully", category="success")
                     return redirect(url_for("home"))
                 else:
@@ -207,7 +206,6 @@ def login():
                 if CheckHashPassword(credential_check_email.pwd, pwd_entered):
                     login_user(credential_check_email)
                     print("logged in")
-                    session["logged"] = True
                     flash("You have been logged in successfully", category="success")
                     return redirect(url_for("home"))
                 else:
@@ -263,8 +261,6 @@ def register():
 
             login_user(new_user)
 
-            session["logged"] = True
-
             return redirect(url_for("home"))
         
         if register_form.errors != {}:
@@ -279,7 +275,6 @@ def register():
 @app.route("/logout")
 def logout():
     logout_user()
-    session.pop("logged")
 
     if "email" in session:
         session.pop("email")
@@ -297,7 +292,7 @@ def reset_pwd():
 
     user_details_row_alternative = Users.query.filter_by(email=email).first()
 
-    if 'logged' in session:
+    if current_user.is_authenticated:
         user_details_row = Users.query.filter_by(id=current_user.id).first()
         if request.method == "POST":
             pwd_entered = request.form.get("pwd")
@@ -308,14 +303,14 @@ def reset_pwd():
 
                 db.session.commit()
                 flash(message="Your password has been changed successfully!", category="success")
-                return redirect(url_for('profile'))
+                return redirect(url_for('profile'))                
             else:
                 flash(message="Password should be same as confirmed password.", category="danger")
 
                 return render_template("reset-pwd.html")   
-        session.pop("logged")
+            
                      
-    elif 'logged' not in session and user_details_row_alternative:
+    elif not current_user.is_authenticated and user_details_row_alternative:
         if request.method == "POST":
             pwd_entered = request.form.get("pwd")
             pwd_entered_confirm = request.form.get("pwd-confirm")
@@ -325,6 +320,7 @@ def reset_pwd():
 
                 db.session.commit()
                 flash(message="Your password has been changed successfully!", category="success")
+                session.pop("email")
                 return redirect(url_for('profile'))
             else:
                 flash(message="Password should be same as confirmed password.", category="danger")
