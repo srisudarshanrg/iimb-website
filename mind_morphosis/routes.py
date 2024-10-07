@@ -226,9 +226,11 @@ def login():
             to_email_address = request.form.get("forgot-pwd")
             session['email'] = to_email_address
 
+            msg = f"OTP for {to_email_address} from MindMorphosis is {otp}"
+
             smtp.starttls()
             smtp.login(user=email, password=app_pwd)
-            smtp.sendmail(from_addr=email, to_addrs=to_email_address, msg=otp)
+            smtp.sendmail(from_addr=email, to_addrs=to_email_address, msg=msg)
 
             flash(message="An OTP has been sent to your mail. Please check the OTP and type in below.", category="info")
 
