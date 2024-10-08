@@ -15,7 +15,12 @@ import smtplib
 @app.route("/home")
 @login_required
 def home():
-    return render_template("home.html")
+    if "admin" in session:
+        admin=True
+    else:
+        admin=False
+
+    return render_template("home.html", admin=admin)
 
 # profile is the handler for the user profile page
 @app.route("/profile", methods=["GET", "POST"])
@@ -100,13 +105,22 @@ def profile():
                 flash(message="Incorrect Password", category="danger")
                 return redirect(url_for('profile'))
 
-    return render_template("profile.html", user_details=user_details, change=change_form)
+    if "admin" in session:
+        admin=True
+    else:
+        admin=False
+
+    return render_template("profile.html", user_details=user_details, change=change_form, admin=admin)
 
 # about is the handler for the about page
 @app.route("/about")
 @login_required
 def about():
-    return render_template("about.html")
+    if "admin" in session:
+        admin=True
+    else:
+        admin=False
+    return render_template("about.html", admin=admin)
 
 # contact is the handler for the contact page
 @app.route("/contact", methods=["GET", "POST"])
@@ -126,37 +140,62 @@ def contact():
 
         return render_template("contact.html")
 
-    return render_template("contact.html")
+    if "admin" in session:
+        admin=True
+    else:
+        admin=False
+
+    return render_template("contact.html", admin=admin)
 
 # education is the handler for the education page
 @app.route("/education")
 @login_required
 def education():
-    return render_template("education.html")
+    if "admin" in session:
+        admin=True
+    else:
+        admin=False
+    return render_template("education.html", admin=admin)
 
 # services is the handler for the services page
 @app.route("/services")
 @login_required
 def services():
-    return render_template("services.html")
+    if "admin" in session:
+        admin=True
+    else:
+        admin=False
+    return render_template("services.html", admin=admin)
 
 # subscription is the handler for the subscription page
 @app.route("/subscription")
 @login_required
 def subscription():
-    return render_template("subscription.html")
+    if "admin" in session:
+        admin=True
+    else:
+        admin=False
+    return render_template("subscription.html", admin=admin)
 
 # terms is the handler for the terms page
 @app.route("/terms")
 @login_required
 def terms():
-    return render_template("terms.html")
+    if "admin" in session:
+        admin=True
+    else:
+        admin=False
+    return render_template("terms.html", admin=admin)
 
 # tranquility is the handler for the tranquility page
 @app.route("/tranquility")
 @login_required
 def tranquility():
-    return render_template("tranquility.html")
+    if "admin" in session:
+        admin=True
+    else:
+        admin=False
+    return render_template("tranquility.html", admin=admin)
 
 # forum is the handler for the forum page
 @app.route("/forum", methods=["GET", "POST"])
@@ -179,7 +218,19 @@ def forum():
 
         return redirect(url_for('forum'))
 
-    return render_template("forum.html", msgs=user_msg_row)
+    if "admin" in session:
+        admin=True
+    else:
+        admin=False
+    return render_template("forum.html", msgs=user_msg_row, admin=admin)
+
+@app.route("/admin", methods=["GET", "POST"])
+def admin():
+    if "admin" in session:
+        admin=True
+    else:
+        admin=False
+    return render_template("admin.html", admin=admin)
 
 # login is the handler for the login page
 @app.route("/login", methods=["GET", "POST"])
@@ -197,6 +248,8 @@ def login():
             if credential_check_username:
                 if CheckHashPassword(credential_check_username.pwd, pwd_entered):
                     login_user(credential_check_username)
+                    if credential_check_username.email == "srisudarshanrg@gmail.com":
+                        session["admin"] = True
                     flash("You have been logged in successfully", category="success")
                     return redirect(url_for("home"))
                 else:
@@ -205,7 +258,8 @@ def login():
             elif credential_check_email:
                 if CheckHashPassword(credential_check_email.pwd, pwd_entered):
                     login_user(credential_check_email)
-                    print("logged in")
+                    if credential_check_email.email == "srisudarshanrg@gmail.com":
+                        session["admin"] = True
                     flash("You have been logged in successfully", category="success")
                     return redirect(url_for("home"))
                 else:
@@ -283,6 +337,9 @@ def logout():
 
     if "otp" in session:
         session.pop("otp")
+
+    if "admin" in session:
+        session.pop("admin")
         
     flash(message="You have been logged out", category="info")
     return redirect(url_for('login'))
