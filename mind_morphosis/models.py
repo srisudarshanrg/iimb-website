@@ -12,8 +12,9 @@ class Users(db.Model, UserMixin):
     pwd = db.Column(db.String(), nullable=False)
     phone = db.Column(db.String(), nullable=False)
     join_date = db.Column(db.DateTime(), nullable=False)
-    subscription_id = db.Column(db.Integer(), db.ForeignKey("subscription.id"))
+    subscription_id = db.Column(db.String(), db.ForeignKey("subscription.subscription_options"))
     subscription_expire = db.Column(db.DateTime())
+    forum_msg = db.Column(db.Integer(), default=0)
     subscription = db.relationship("Subscription", backref="subscription", lazy=True, foreign_keys=[subscription_id])
 
 class Subscription(db.Model):

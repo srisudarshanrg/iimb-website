@@ -1,7 +1,6 @@
 import datetime
 import random
 from flask import flash, redirect, render_template, request, session, url_for
-from flask.cli import F
 from flask_login import current_user, login_user, login_required, logout_user
 from .forms import ChangeForm, LoginForm, RegisterForm
 from .functions import CheckHashPassword, HashPassword
@@ -16,7 +15,7 @@ import smtplib
 @login_required
 def home():
     if "admin" in session:
-        admin=True
+        admin = session.get("admin")
     else:
         admin=False
 
@@ -106,7 +105,7 @@ def profile():
                 return redirect(url_for('profile'))
 
     if "admin" in session:
-        admin=True
+        admin = session.get("admin")
     else:
         admin=False
 
@@ -117,7 +116,7 @@ def profile():
 @login_required
 def about():
     if "admin" in session:
-        admin=True
+        admin = session.get("admin")
     else:
         admin=False
     return render_template("about.html", admin=admin)
@@ -141,7 +140,7 @@ def contact():
         return render_template("contact.html")
 
     if "admin" in session:
-        admin=True
+        admin = session.get("admin")
     else:
         admin=False
 
@@ -152,7 +151,7 @@ def contact():
 @login_required
 def education():
     if "admin" in session:
-        admin=True
+        admin = session.get("admin")
     else:
         admin=False
     return render_template("education.html", admin=admin)
@@ -162,7 +161,7 @@ def education():
 @login_required
 def services():
     if "admin" in session:
-        admin=True
+        admin = session.get("admin")
     else:
         admin=False
     return render_template("services.html", admin=admin)
@@ -172,7 +171,7 @@ def services():
 @login_required
 def subscription():
     if "admin" in session:
-        admin=True
+        admin = session.get("admin")
     else:
         admin=False
     return render_template("subscription.html", admin=admin)
@@ -182,7 +181,7 @@ def subscription():
 @login_required
 def terms():
     if "admin" in session:
-        admin=True
+        admin = session.get("admin")
     else:
         admin=False
     return render_template("terms.html", admin=admin)
@@ -192,7 +191,7 @@ def terms():
 @login_required
 def tranquility():
     if "admin" in session:
-        admin=True
+        admin = session.get("admin")
     else:
         admin=False
     return render_template("tranquility.html", admin=admin)
@@ -214,23 +213,52 @@ def forum():
         )
 
         db.session.add(new_msg)
-        db.session.commit()
 
+        forum_count = user_details.forum_msg
+        forum_count += 1
+
+        user_details.forum_msg = forum_count
+
+        db.session.commit()
+        
         return redirect(url_for('forum'))
 
     if "admin" in session:
-        admin=True
+        admin = session.get("admin")
     else:
         admin=False
     return render_template("forum.html", msgs=user_msg_row, admin=admin)
 
 @app.route("/admin", methods=["GET", "POST"])
+@login_required
 def admin():
     if "admin" in session:
-        admin=True
+        admin = session.get("admin")
     else:
         admin=False
-    return render_template("admin.html", admin=admin)
+
+    users = Users.query.filter_by().all()
+    
+    sessions = Session.query.filter_by().all()
+
+    sessions_list = []
+
+    for session in sessions:
+        session_date = session.session_date.strftime("%d %B %Y")
+        session_time_start = session.session_time_start.strftime("%H:%M")
+        session_time_end = session.session_time_end.strftime("%H:%M")
+        
+        session_dict = {
+            "id": session.id,
+            "session_user": session.session_user,
+            "session_date": session_date,
+            "session_time_start": session_time_start,
+            "session_time_end": session_time_end,
+        }
+
+        sessions_list.append(session_dict)
+    
+    return render_template("admin.html", admin=admin, users=users, sessions=sessions_list)
 
 # login is the handler for the login page
 @app.route("/login", methods=["GET", "POST"])
