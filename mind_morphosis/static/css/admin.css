@@ -1,0 +1,43 @@
+nav {
+    border-bottom: 1px solid grey;
+}
+
+.admin-visit-btn {
+    display: none;
+}
+
+.info {
+    padding-left: 2%;
+}
+
+.info .row {
+    width: 100%;
+}
+
+.info table {
+    width: 100%;
+    cursor: pointer;
+    border: 1px solid #000;
+}
+
+.info .scrollable-table {
+    height: 150px;
+    overflow: hidden;
+    overflow-y: scroll;
+    overflow-x: scroll;
+}
+
+thead {
+    text-align: justify;
+    position: sticky;
+    top: 0;
+}
+
+h3 {
+    text-align: center;
+}
+
+.footer {
+    margin-top: 3%;
+    border-top: 1px solid grey;
+}

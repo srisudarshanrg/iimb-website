@@ -12,14 +12,13 @@ class Users(db.Model, UserMixin):
     pwd = db.Column(db.String(), nullable=False)
     phone = db.Column(db.String(), nullable=False)
     join_date = db.Column(db.DateTime(), nullable=False)
-    subscription_id = db.Column(db.String(), db.ForeignKey("subscription.subscription_options"))
+    subscription = db.Column(db.String(), db.ForeignKey("subscription.subscriptions"))
     subscription_expire = db.Column(db.DateTime())
     forum_msg = db.Column(db.Integer(), default=0)
-    subscription = db.relationship("Subscription", backref="subscription", lazy=True, foreign_keys=[subscription_id])
 
 class Subscription(db.Model):
     id = db.Column(db.Integer(), primary_key=True, nullable=False)
-    subscription_options = db.Column(db.String(), nullable=False, unique=True)
+    subscriptions = db.Column(db.String(), nullable=False, unique=True)
 
 class Session(db.Model):
     id = db.Column(db.Integer(), primary_key=True, nullable=False)

@@ -27,12 +27,10 @@ def home():
 def profile():
     user_details_row = Users.query.filter_by(id=current_user.id).first()
 
-    subscription_choice_row = Subscription.query.filter_by(id=user_details_row.subscription_id).first()
-
-    if subscription_choice_row:
-        subscription_choice = subscription_choice_row.subscription_options
+    if user_details_row.subscription != None:
+        subscription_choice = user_details_row.subscription
     else:
-        subscription_choice = "No subscriptions subscribed for now"
+        subscription_choice = "No subscription subscribed for now"
 
     sessions = Session.query.filter_by(id=current_user.id).all()
 
@@ -49,7 +47,7 @@ def profile():
     if subscription_expire:
         subscription_expire = subscription_expire.strftime("%d %B %Y")
     else:
-        subscription_expire = ""
+        subscription_expire = "--"
 
     user_details = {
         "id": user_details_row.id,
@@ -236,29 +234,61 @@ def admin():
         admin = session.get("admin")
     else:
         admin=False
+        flash(message="You have to be an admin to access the admin page.", category="info")
+        return redirect(url_for("home"))
 
     users = Users.query.filter_by().all()
+
+    user_list = []
+
+    for user in users:
+        if user.subscription == None:
+            subscription_option = "None"
+            subscription_expire = "--"
+        else:
+            subscription_option = user.subscription
+            subscription_expire = user.subscription_expire.strftime("%d %B %Y")
+
+        join_date = user.join_date.strftime("%d %B %Y")
+        
+        user_dict = {
+            "id": user.id,
+            "username": user.username,
+            "email": user.email,
+            "phone": user.phone,
+            "join_date": join_date,
+            "subscription": subscription_option,
+            "subscription_expire": subscription_expire,
+            "forum": user.forum_msg,
+        }
+
+        user_list.append(user_dict)
     
     sessions = Session.query.filter_by().all()
 
     sessions_list = []
 
-    for session in sessions:
-        session_date = session.session_date.strftime("%d %B %Y")
-        session_time_start = session.session_time_start.strftime("%H:%M")
-        session_time_end = session.session_time_end.strftime("%H:%M")
+    for session_individual in sessions:
+        session_date = session_individual.session_date.strftime("%d %B %Y")
+        session_time_start = session_individual.session_time_start.strftime("%H:%M")
+        session_time_end = session_individual.session_time_end.strftime("%H:%M")
         
         session_dict = {
-            "id": session.id,
-            "session_user": session.session_user,
+            "id": session_individual.id,
+            "session_user": session_individual.session_user,
             "session_date": session_date,
             "session_time_start": session_time_start,
             "session_time_end": session_time_end,
         }
 
         sessions_list.append(session_dict)
+
+    if len(sessions_list) == 0:
+        session_exist = False
+    else:
+        session_exist = True
     
-    return render_template("admin.html", admin=admin, users=users, sessions=sessions_list)
+    return render_template("admin.html", admin=admin, users=user_list, sessions=sessions_list, session_exist=session_exist)
 
 # login is the handler for the login page
 @app.route("/login", methods=["GET", "POST"])

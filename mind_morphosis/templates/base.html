@@ -96,7 +96,8 @@
         </nav>
 
         {% if admin == True %}
-            <a href="{{url_for('admin')}}" class="btn btn-primary" style="width: 100%;">Visit Admin Page</a>
+            <a href="{{url_for('admin')}}" class="btn btn-primary admin-visit-btn" style="width: 100%;">Visit Admin Page</a>
+            <br>    
         {% endif %}
 
         {% block content %}
