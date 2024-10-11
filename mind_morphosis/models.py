@@ -22,7 +22,7 @@ class Subscription(db.Model):
 
 class Session(db.Model):
     id = db.Column(db.Integer(), primary_key=True, nullable=False)
-    session_user = db.Column(db.Integer(), db.ForeignKey("users.id"), nullable=False)
+    session_user = db.Column(db.String(), db.ForeignKey("users.username"), nullable=False)
     session_date = db.Column(db.DateTime(), nullable=False)
     session_time_start = db.Column(db.DateTime(), nullable=False)
     session_time_end = db.Column(db.DateTime(), nullable=False)

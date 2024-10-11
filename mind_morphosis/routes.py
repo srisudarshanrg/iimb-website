@@ -303,17 +303,47 @@ def admin():
                 db.session.delete(user)
                 db.session.commit()
 
-                flash(message=f"User with username '{username}' has been deleted", category="info")
+                msg = f"Your account on MindMorphosis has been deleted. \n Reason: {reason}."
 
                 smtp = smtplib.SMTP("smtp.gmail.com", 587)
 
                 smtp.starttls()
                 smtp.login(user=email, password=app_pwd)
-                smtp.sendmail(from_addr=email, to_addrs=user.email, msg=reason)
+                smtp.sendmail(from_addr=email, to_addrs=user.email, msg=msg)
+
+                flash(message=f"User with username '{username}' has been deleted and {username} has been notified via email", category="info")
 
                 return redirect(url_for('admin'))
             else:
                 flash(message=f"User with username '{username}' doesn't exist in database", category="danger")
+
+        elif "deleteSession" in request.form:
+            username = request.form.get("session_delete")
+            reason = request.form.get("session_delete_reason")
+
+            session_required = Session.query.filter_by(session_user=username).first()
+
+            if session_required:
+                db.session.delete(session_required)
+                db.session.commit()
+
+                session_date = session_required.session_date.strftime("%d %B %Y")
+                session_time_start = session_required.session_time_start.strftime("%H: %M")
+                session_time_end = session_required.session_time_end.strftime("%H: %M")
+
+                msg = f"Your session with MindMorphosis on {session_date} from {session_time_start} to {session_time_end} has been cancelled. \n Reason: {reason}"
+
+                smtp = smtplib.SMTP("smtp.gmail.com", 587)
+
+                smtp.starttls()
+                smtp.login(user=email, password=app_pwd)
+                smtp.sendmail(from_addr=email, to_addrs=user.email, msg=msg)
+
+                flash(f"Session with {username} has been cancelled and {username} has been notified via email", category="info")
+
+                return redirect(url_for('admin'))
+            else:
+                flash(f"Session with {username} has not been booked yet and does not exist", category="danger")
     
     return render_template("admin.html", admin=admin, users=user_list, sessions=sessions_list, session_exist=session_exist)
 

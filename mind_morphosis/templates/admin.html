@@ -32,6 +32,29 @@
         </div>
     </div>
 
+    <!-- Delete Session Modal -->
+    <div class="modal fade" id="exampleModalDeleteSession" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Cancel Session</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form method="post">
+                    <div class="modal-body">
+                        <input type="hidden" name="deleteSession">
+                        <input type="text" placeholder="Enter username of user whose session you are cancelling" name="session_delete" class="form-control" required>
+                        <textarea name="user_delete_reason" id="session_delete_reason" class="form-control" style="margin-top: 1%;" rows="3" placeholder="Enter reason to cancel session" required></textarea>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-danger">Cancel Session</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
     <div class="info">
         <h1 class="text-center">Admin Page</h1>
 
@@ -93,7 +116,7 @@
 
                 <br>
 
-                <button class="btn btn-danger">Delete Session</button>
+                <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModalDeleteSession">Delete Session</button>
             </div>
         </div>
     </div>
