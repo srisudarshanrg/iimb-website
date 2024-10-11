@@ -287,6 +287,33 @@ def admin():
         session_exist = False
     else:
         session_exist = True
+
+    if request.method == "POST":
+        if "deleteUser" in request.form:
+            username = request.form.get("user_delete")
+            reason = request.form.get("user_delete_reason")
+
+            if username == "sudarshan_raptor":
+                flash(message=f"Cannot delete admin account {username}", category="danger")
+                return redirect(url_for('admin'))
+
+            user = Users.query.filter_by(username=username).first()
+            
+            if user:
+                db.session.delete(user)
+                db.session.commit()
+
+                flash(message=f"User with username '{username}' has been deleted", category="info")
+
+                smtp = smtplib.SMTP("smtp.gmail.com", 587)
+
+                smtp.starttls()
+                smtp.login(user=email, password=app_pwd)
+                smtp.sendmail(from_addr=email, to_addrs=user.email, msg=reason)
+
+                return redirect(url_for('admin'))
+            else:
+                flash(message=f"User with username '{username}' doesn't exist in database", category="danger")
     
     return render_template("admin.html", admin=admin, users=user_list, sessions=sessions_list, session_exist=session_exist)
 
