@@ -10,27 +10,59 @@
 
 {% block content %}
     <br>
-    <h1 class="headings">Forum</h1>
     
-    <div class="msgs">
-        {% for msg in msgs %}
-            <div class="exist-msg" style="width: 100%; margin-top: 2%;">
-                {% if msg.msg_user == None %}
-                    <small>deleted_user</small>
-                {% else %}
-                    <small>{{msg.msg_user}}</small>
-                {% endif %}
-                
-                <br>
-                <h5>{{msg.msg}}</h5>
-            </div>
-        {% endfor %}
-        <br>
-        <br>
+    <div class="row" style="width: 100%;">
+        <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 msgs">
+            {% for msg in msgs %}
+                <div class="exist-msg" style="width: 100%; margin-top: 2%;">
+                    {% if msg.msg_user == None %}
+                        <small>deleted_user</small>
+                    {% else %}
+                        <small>{{msg.msg_user}}</small>
+                    {% endif %}
+                    
+                    <br>
+                    <h5>{{msg.msg}}</h5>
+                </div>
+            {% endfor %}
+            <br>
+            <br>
+        </div>
+
+        <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+            <h3>Search for messages</h3>
+
+            <form method="post">
+                <input type="hidden" name="searchMsg">
+
+                <input type="text" name="search_msg" id="search-msg" placeholder="Search for a message" class="form-control">
+
+                <button type="submit" class="btn btn-success btn-sm" style="margin-top: 1.5%;">Search</button>
+            </form>
+
+            {% if results %}
+                <div class="scrollable-results">
+                    {% for result in results %}
+                        
+                            <div class="exist-msg" style="width: 100%; margin-top: 2%;">
+                                {% if result.msg_user == None %}
+                                    <small style="margin-left: 1%;">deleted_user</small>
+                                {% else %}
+                                    <small style="margin-left: 1%;">{{result.msg_user}}</small>
+                                {% endif %}
+                                
+                                <br>
+                                <h5 style="margin-left: 1%;">{{result.msg}}</h5>
+                            </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
     </div>
 
     <form method="post" class="msg-form" autocomplete="off">
         <div class="row" id="form-row">
+            <input type="hidden" name="newMsg">
              <div class="col-lg-10 col-md-10 col-sm-8 col-xs-8">
                 <input type="text" name="msg" id="msg" placeholder="Type a message" class="form-control">
              </div>

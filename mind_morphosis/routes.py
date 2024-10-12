@@ -198,33 +198,42 @@ def tranquility():
 @app.route("/forum", methods=["GET", "POST"])
 @login_required
 def forum():
+    if "admin" in session:
+        admin = session.get("admin")
+    else:
+        admin=False
+
     user_details = Users.query.filter_by(id=current_user.id).first()
     username = user_details.username
 
     user_msg_row = Forum.query.filter_by().all()
 
     if request.method == "POST":
-        msg = request.form.get("msg")
-        new_msg = Forum(
-            msg=msg,
-            msg_user=username,
-        )
+        if "newMsg" in request.form:
+            msg = request.form.get("msg")
 
-        db.session.add(new_msg)
+            new_msg = Forum(
+                msg=msg,
+                msg_user=username,
+            )
 
-        forum_count = user_details.forum_msg
-        forum_count += 1
+            db.session.add(new_msg)
 
-        user_details.forum_msg = forum_count
+            forum_count = user_details.forum_msg
+            forum_count += 1
 
-        db.session.commit()
+            user_details.forum_msg = forum_count
+
+            db.session.commit()
+            
+            return redirect(url_for('forum'))
         
-        return redirect(url_for('forum'))
+        elif "searchMsg" in request.form:
+            query = request.form.get("search_msg")
+            results = Forum.query.filter(Forum.msg.contains(f"{query}")).all()
 
-    if "admin" in session:
-        admin = session.get("admin")
-    else:
-        admin=False
+            return render_template("forum.html", results=results, msgs=user_msg_row, admin=admin)
+    
     return render_template("forum.html", msgs=user_msg_row, admin=admin)
 
 @app.route("/admin", methods=["GET", "POST"])
