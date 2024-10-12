@@ -42,18 +42,17 @@
 
             {% if results %}
                 <div class="scrollable-results">
-                    {% for result in results %}
-                        
-                            <div class="exist-msg" style="width: 100%; margin-top: 2%;">
-                                {% if result.msg_user == None %}
-                                    <small style="margin-left: 1%;">deleted_user</small>
-                                {% else %}
-                                    <small style="margin-left: 1%;">{{result.msg_user}}</small>
-                                {% endif %}
-                                
-                                <br>
-                                <h5 style="margin-left: 1%;">{{result.msg}}</h5>
-                            </div>
+                    {% for result in results %}                        
+                        <div class="exist-msg" style="width: 100%; margin-top: 2%;">
+                            {% if result.msg_user == None %}
+                                <small style="margin-left: 1%;">deleted_user</small>
+                            {% else %}
+                                <small style="margin-left: 1%;">{{result.msg_user}}</small>
+                            {% endif %}
+                            
+                            <br>
+                            <h5 style="margin-left: 1%;">{{result.msg}}</h5>
+                        </div>
                     {% endfor %}
                 </div>
             {% endif %}
