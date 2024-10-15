@@ -211,7 +211,7 @@ def forum():
     user_list = []
     for user in user_msg_row:
         date = user.date.strftime("%d %B %Y")
-        time = user.date.strftime("%H: %M")
+        time = user.date.strftime("%H:%M")
 
         user_dict = {
             "msg": user.msg,
