@@ -31,5 +31,6 @@ class Session(db.Model):
 class Forum(db.Model):
     id = db.Column(db.Integer(), primary_key=True, nullable=False)
     msg = db.Column(db.String())
-    msg_user = db.Column(db.String(), db.ForeignKey("users.username"))    
+    msg_user = db.Column(db.String(), db.ForeignKey("users.username"))
+    date = db.Column(db.DateTime()) 
     user = db.relationship("Users", backref="sent_by_user", lazy=True, foreign_keys=[msg_user])

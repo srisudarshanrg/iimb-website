@@ -208,13 +208,30 @@ def forum():
 
     user_msg_row = Forum.query.filter_by().all()
 
+    user_list = []
+    for user in user_msg_row:
+        date = user.date.strftime("%d %B %Y")
+        time = user.date.strftime("%H: %M")
+
+        user_dict = {
+            "msg": user.msg,
+            "msg_user": user.msg_user,
+            "date": date,
+            "time": time,
+        }
+
+        user_list.append(user_dict)
+
     if request.method == "POST":
         if "newMsg" in request.form:
             msg = request.form.get("msg")
 
+            date = datetime.datetime.now()
+
             new_msg = Forum(
                 msg=msg,
                 msg_user=username,
+                date=date,
             )
 
             db.session.add(new_msg)
@@ -234,7 +251,7 @@ def forum():
 
             return render_template("forum.html", results=results, msgs=user_msg_row, admin=admin)
     
-    return render_template("forum.html", msgs=user_msg_row, admin=admin)
+    return render_template("forum.html", msgs=user_list, admin=admin)
 
 @app.route("/admin", methods=["GET", "POST"])
 @login_required
