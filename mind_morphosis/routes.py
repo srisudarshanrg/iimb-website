@@ -389,7 +389,7 @@ def login():
             if credential_check_username:
                 if CheckHashPassword(credential_check_username.pwd, pwd_entered):
                     login_user(credential_check_username)
-                    if credential_check_username.email == "srisudarshanrg@gmail.com":
+                    if credential_check_username.email == email:
                         session["admin"] = True
                     flash("You have been logged in successfully", category="success")
                     return redirect(url_for("home"))
@@ -399,7 +399,7 @@ def login():
             elif credential_check_email:
                 if CheckHashPassword(credential_check_email.pwd, pwd_entered):
                     login_user(credential_check_email)
-                    if credential_check_email.email == "srisudarshanrg@gmail.com":
+                    if credential_check_email.email == email:
                         session["admin"] = True
                     flash("You have been logged in successfully", category="success")
                     return redirect(url_for("home"))
